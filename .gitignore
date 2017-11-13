@@ -1,3 +1,5 @@
 node_modules
+id_rsa.pub
+id_rsa
 credentials.cfg
 settings.cfg
