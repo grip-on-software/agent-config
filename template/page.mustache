@@ -2,10 +2,11 @@
 <html>
     <head>
         <title>Agent configuration | GROS</title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Vollkorn">
         <style>
-			body {
-				font-family: 'Roboto' sans-serif;
-			}
+            body {
+                font-family: 'Roboto', sans-serif;
+            }
             form {
                 border-bottom: 1px dashed #ccc;
                 width: 375px;
@@ -23,7 +24,7 @@
                 padding: 10px 5px 15px 5px;
                 position: relative;
             }
-            .field input, .field select, .field textarea {
+            .field input, .field select, .field textarea, .field button {
                 margin: -20px 0 0 175px;
                 width: 180px;
             }
@@ -39,11 +40,21 @@
                 margin: 0;
                 width: 20px;
             }
-			.hint {
-				font-size: 90%;
-				color: #333333;
-				text-align: right;
-			}
+            .field button {
+                font-size: 120%;
+            }
+            .hint {
+                font-size: 85%;
+                color: #333333;
+                text-align: right;
+            }
+            .hint .longer_hint {
+                display: none;
+                text-align: justify;
+            }
+            .field:hover + .hint .longer_hint, .hint:hover .longer_hint {
+                display: block;
+            }
             .error {
                 background: #ffcccc;
             }
@@ -61,7 +72,9 @@
         <h1>Agent configuration</h1>
         <form action="" method="{{method}}" enctype="{{enctype}}">
             {{{form}}}
-            <button type="submit">Submit</button>
+            <div class="field">
+                <button type="submit">Update</button>
+            </div>
         </form>
     </body>
 </html>
