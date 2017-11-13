@@ -1,109 +1,116 @@
 environment:
-    bigboat_url:
-        field: string
-        required: true
-        label: 'BigBoat URL'
-        hint: 'The URL to the location of the BigBoat dashboard.'
-        placeholder: 'http://bigboat.example'
-        option: [settings, 'bigboat', 'host']
-    bigboat_key:
-        field: string
-        required: true
-        label: 'BigBoat key'
-        widget: password
-        hint: 'An API key of the BigBoat dashboard.'
-        longer_hint: "You can generate a new key on the dashboard's configuration page. Do not generate the API key while logged out. Any logged-in API key works."
-        option: [settings, 'bigboat', 'key']
-    jira_key:
-        field: string
-        required: true
-        label: 'JIRA key prefix'
-        placeholder: 'ABC'
-        hint: 'The JIRA prefix used to identify issues in the JIRA board.'
-        longer_hint: 'If you have issues like <samp>ABC-1234</samp>, then this is <kbd>ABC</kbd>. You can also find it on <a href="http://jira.example/jira/secure/BrowseProjects.jspa?selectedCategory=all&selectedProjectType=all">the Browse Projects</a> page where it is in the "Key" column. If you use multiple JIRA boards in your project (which share the same dashboard environment) then provide all of them, the main project key first.'
-        option: [settings, 'projects']
-    quality_report_name:
-        field: string
-        required: true
-        label: 'Quality report name'
-        placeholder: 'abc'
-        hint: 'The name of the project used internally by the quality report dashboard.'
-        longer_hint: 'Find the name on <a href="http://jenkins.example:8080/view/Quality%20reports/">the Quality reports view</a>; if you have a job name like <samp>quality-report-abc</samp> then this is <kdb>abc</kdb>.'
-        option: [settings, 'projects', fields.jira_key]
+    name: Project dashboard environment
+    fields:
+        bigboat_url:
+            field: string
+            required: true
+            label: 'BigBoat URL'
+            hint: 'The URL to the location of the BigBoat dashboard.'
+            placeholder: 'http://bigboat.example'
+            option: [settings, 'bigboat', 'host']
+        bigboat_key:
+            field: string
+            required: true
+            label: 'BigBoat key'
+            widget: password
+            hint: 'An API key of the BigBoat dashboard.'
+            longer_hint: "You can generate a new key on the dashboard's configuration page. Do not generate the API key while logged out. Any logged-in API key works."
+            option: [settings, 'bigboat', 'key']
+        jira_key:
+            field: string
+            required: true
+            label: 'JIRA key prefix'
+            placeholder: 'ABC'
+            hint: 'The JIRA prefix used to identify issues in the JIRA board.'
+            longer_hint: 'If you have issues like <samp>ABC-1234</samp>, then this is <kbd>ABC</kbd>. You can also find it on <a href="http://jira.example/jira/secure/BrowseProjects.jspa?selectedCategory=all&selectedProjectType=all">the Browse Projects</a> page where it is in the "Key" column. If you use multiple JIRA boards in your project (which share the same dashboard environment) then provide all of them, the main project key first.'
+            option: [settings, 'projects']
+        quality_report_name:
+            field: string
+            required: true
+            label: 'Quality report name'
+            placeholder: 'abc'
+            hint: 'The name of the project used internally by the quality report dashboard.'
+            longer_hint: 'Find the name on <a href="http://jenkins.example:8080/view/Quality%20reports/">the Quality reports view</a>; if you have a job name like <samp>quality-report-abc</samp> then this is <kdb>abc</kdb>.'
+            option: [settings, 'projects', fields.jira_key]
 version_control:
-    version_control_type:
-        field: string
-        required: true,
-        label: 'Version control type'
-        choices:
-            git: 'Git'
-            gitlab: 'GitLab'
-            github: 'GitHub'
-            tfs: 'Team Foundation Server'
-            svn: 'Subversion'
-        widget: select
-        hint: 'The type of version control system used.'
-        longer_hint: 'For Git systems, we accept several flavors which provide us with richer data. Currently, only one source is accepted. If you use multiple version control systems, consider migrating them to one and provide the system with the most relevant source code.'
-    version_control_domain:
-        field: string
-        required: true
-        label: 'Version control domain'
-        placeholder: 'gitlab.example'
-        hint: 'The domain name plus optional port number where the version control system is hosted.'
-        longer_hint: 'For example <samp>gitlab.example</samp> or <samp>tfs.example:8080</samp>.'
-    version_control_auth:
-        field: string
-        required: true
-        label: 'Version control authentication'
-        choices:
-            none: 'Anonymous checkout'
-            github_api: 'GitHub API'
-            gitlab_api: 'GitLab API'
-            gitlab_deploy: 'GitLab deploy key'
-            user_pass: 'Username and password'
-        widget: select
-        hint: 'The authentication scheme to use when connecting to the version control system.'
-        longer_hint: |
-            <ul>
-                <li>Anonymous checkout: generally not an acceptable method.</li>
-                <li>GitHub API: Use the API to register a specific SSH token for a user.</li>
-                <li>GitLab API: Use the API to register a specific SSH token for a user. This user needs at least Reporter level access permissions to the group. Generate an API token for this user on GitLab in the user's Settings, under Personal Access tokens. Use a descriptive name "GROS reporter" with no expiry for the "api" scope. Keep the username field in this form empty and provide the API token in the password field after that.</li>
-                <li>GitLab deploy key: Administrator access to GitLab is required to register the deploy key pair. On Linux/Mac, use <kbd>ssh-keygen -t rsa -C "agent gitlab access" -b 4096 -f deploy_key</kbd> and press <kbd>Enter</kbd> twice to skip entering a passphrase (not supported at this moment). Insert the public part (found in <samp>deploy_key.pub</samp>) on GitLab in the Admin Area under Deploy Keys with a descriptive name <kbd>"GROS reporter"</kbd>, and without write access. Keep the next field empty and provide the contents of the private key (<samp>deploy_key</samp>) in the field after that.</li>
-                <li>Username and password: Combination as used by TFS or Subversion. Provide the username and password in the next two fields.</li>
-            </ul>
-    version_control_user:
-        field: string
-        label: 'Version control username'
-        hint: 'The username to login to the version control system with. Only used if the authentication is "Username and password".'
-    version_control_token:
-        field: string
-        label: 'Version control authentication token'
-        widget: password
-        hint: 'The password, deploy key or API token to login to the version control system with.'
-    gitlab_group_name:
-        field: string
-        label: 'GitLab group name'
-        placeholder: 'abc'
-        hint: 'The path name of the group on GitLab in which all the source code repositories are stored.'
-        longer_hint: 'This is found under the Settings for the group on GitLab, with setting name "Group path". This is only necessary if the quality reporting dashboard has no metrics for the source code repository.'
-        option: [credentials, form.fields.version_control_domain.value, 'group']
+    name: Version control system
+    cloneable: true
+    fields:
+        version_control_type:
+            field: string
+            required: true,
+            label: 'Version control type'
+            choices:
+                git: 'Git'
+                gitlab: 'GitLab'
+                github: 'GitHub'
+                tfs: 'Team Foundation Server'
+                svn: 'Subversion'
+            widget: select
+            hint: 'The type of version control system used.'
+            longer_hint: 'For Git systems, we accept several flavors which provide us with richer data. Currently, only one source is accepted. If you use multiple version control systems, consider migrating them to one and provide the system with the most relevant source code.'
+        version_control_domain:
+            field: string
+            required: true
+            label: 'Version control domain'
+            placeholder: 'gitlab.example'
+            hint: 'The domain name plus optional port number where the version control system is hosted.'
+            longer_hint: 'For example <samp>gitlab.example</samp> or <samp>tfs.example:8080</samp>.'
+        version_control_auth:
+            field: string
+            required: true
+            label: 'Version control authentication'
+            choices:
+                none: 'Anonymous checkout'
+                github_api: 'GitHub API'
+                gitlab_api: 'GitLab API'
+                gitlab_deploy: 'GitLab deploy key'
+                user_pass: 'Username and password'
+            widget: select
+            hint: 'The authentication scheme to use when connecting to the version control system.'
+            longer_hint: |
+                <ul>
+                    <li>Anonymous checkout: generally not an acceptable method.</li>
+                    <li>GitHub API: Use the API to register a specific SSH token for a user.</li>
+                    <li>GitLab API: Use the API to register a specific SSH token for a user. This user needs at least Reporter level access permissions to the group. Generate an API token for this user on GitLab in the user's Settings, under Personal Access tokens. Use a descriptive name "GROS reporter" with no expiry for the "api" scope. Keep the username field in this form empty and provide the API token in the password field after that.</li>
+                    <li>GitLab deploy key: Administrator access to GitLab is required to register the deploy key pair. On Linux/Mac, use <kbd>ssh-keygen -t rsa -C "agent gitlab access" -b 4096 -f deploy_key</kbd> and press <kbd>Enter</kbd> twice to skip entering a passphrase (not supported at this moment). Insert the public part (found in <samp>deploy_key.pub</samp>) on GitLab in the Admin Area under Deploy Keys with a descriptive name <kbd>"GROS reporter"</kbd>, and without write access. Keep the next field empty and provide the contents of the private key (<samp>deploy_key</samp>) in the field after that.</li>
+                    <li>Username and password: Combination as used by TFS or Subversion. Provide the username and password in the next two fields.</li>
+                </ul>
+        version_control_user:
+            field: string
+            label: 'Version control username'
+            hint: 'The username to login to the version control system with. Only used if the authentication is "Username and password".'
+        version_control_token:
+            field: string
+            label: 'Version control authentication token'
+            widget: password
+            hint: 'The password, deploy key or API token to login to the version control system with.'
+        gitlab_group_name:
+            field: string
+            label: 'GitLab group name'
+            placeholder: 'abc'
+            hint: 'The path name of the group on GitLab in which all the source code repositories are stored.'
+            longer_hint: 'This is found under the Settings for the group on GitLab, with setting name "Group path". This is only necessary if the quality reporting dashboard has no metrics for the source code repository.'
+            option: [credentials, form.fields.version_control_domain.value, 'group']
 jenkins:
-    jenkins_host:
-        field: string
-        label: 'Jenkins host'
-        placeholdeR: 'http://jenkins.example:8080'
-        hint: 'The protocol, domain name and optionally port number of the Jenkins instance used for automated builds of the application developed by the team.'
-        longer_hint: 'Get this from the main page of Jenkins by clicking on the logo in the top left and then copying the resulting URL, for example <samp>http://jenkins.example:8080</samp>.'
-        option: [settings, 'jenkins', 'host']
-    jenkins_user:
-        field: string
-        label: 'Jenkins username'
-        hint: 'The username to log in to Jenkins with. This is only necessary if Jenkins is completely restricted to logged-in users, since we only need read access.'
-        option: [settings, 'jenkins', 'username']
-    jenkins_token:
-        field: string
-        label: 'Jenkins token'
-        widget: password
-        hint: 'The password to log in to the Jenkins API with. This is only necessary if Jenkins is completely restricted to logged-in users.'
-        longer_hint: 'Use an API token instead of the plain (LDAP) password. You can find the API token when you are logged in by clicking on your name in the top right, then Configure, and finally press <kbd><samp>Show API Token...</samp></kbd>'
-        option: [settings, 'jenkins', 'password']
+    name: Jenkins
+    fields:
+        jenkins_host:
+            field: string
+            label: 'Jenkins host'
+            placeholdeR: 'http://jenkins.example:8080'
+            hint: 'The protocol, domain name and optionally port number of the Jenkins instance used for automated builds of the application developed by the team.'
+            longer_hint: 'Get this from the main page of Jenkins by clicking on the logo in the top left and then copying the resulting URL, for example <samp>http://jenkins.example:8080</samp>.'
+            option: [settings, 'jenkins', 'host']
+        jenkins_user:
+            field: string
+            label: 'Jenkins username'
+            hint: 'The username to log in to Jenkins with. This is only necessary if Jenkins is completely restricted to logged-in users, since we only need read access.'
+            option: [settings, 'jenkins', 'username']
+        jenkins_token:
+            field: string
+            label: 'Jenkins token'
+            widget: password
+            hint: 'The password to log in to the Jenkins API with. This is only necessary if Jenkins is completely restricted to logged-in users.'
+            longer_hint: 'Use an API token instead of the plain (LDAP) password. You can find the API token when you are logged in by clicking on your name in the top right, then Configure, and finally press <kbd><samp>Show API Token...</samp></kbd>'
+            option: [settings, 'jenkins', 'password']
