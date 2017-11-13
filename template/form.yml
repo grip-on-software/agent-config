@@ -64,7 +64,7 @@ version_control:
                 none: 'Anonymous checkout'
                 github_api: 'GitHub API'
                 gitlab_api: 'GitLab API'
-                gitlab_deploy: 'GitLab deploy key'
+                deploy_key: 'Deploy key'
                 user_pass: 'Username and password'
             widget: select
             hint: 'The authentication scheme to use when connecting to the version control system.'
@@ -73,7 +73,7 @@ version_control:
                     <li>Anonymous checkout: generally not an acceptable method.</li>
                     <li>GitHub API: Use the API to register a specific SSH token for a user.</li>
                     <li>GitLab API: Use the API to register a specific SSH token for a user. This user needs at least Reporter level access permissions to the group. Generate an API token for this user on GitLab in the user's Settings, under Personal Access tokens. Use a descriptive name "GROS reporter" with no expiry for the "api" scope. Keep the username field in this form empty and provide the API token in the password field after that.</li>
-                    <li>GitLab deploy key: Administrator access to GitLab is required to register the deploy key pair. On Linux/Mac, use <kbd>ssh-keygen -t rsa -C "agent gitlab access" -b 4096 -f deploy_key</kbd> and press <kbd>Enter</kbd> twice to skip entering a passphrase (not supported at this moment). Insert the public part (found in <samp>deploy_key.pub</samp>) on GitLab in the Admin Area under Deploy Keys with a descriptive name <kbd>"GROS reporter"</kbd>, and without write access. Keep the next field empty and provide the contents of the private key (<samp>deploy_key</samp>) in the field after that.</li>
+                    <li>Deploy key: Enter a predefined Git SSH private key. Administrator access to GitLab is required to register the deploy key pair. On Linux/Mac, use <kbd>ssh-keygen -t rsa -C "GROS reporter" -b 4096 -f deploy_key</kbd> and press <kbd>Enter</kbd> twice to skip entering a passphrase (not supported at this moment). Insert the public part (found in <samp>deploy_key.pub</samp>) on GitLab in the Admin Area under Deploy Keys with a descriptive name <kbd>"GROS reporter"</kbd>, and without write access. This can also be used for pre-generated SSH key pairs in (other) version control system. Set the username field to the SSH user (such as <kbd>git</kbd>) or keep it empty, and provide the contents of the private key (<samp>deploy_key</samp>) in the token field after that.</li>
                     <li>Username and password: Combination as used by TFS or Subversion. Provide the username and password in the next two fields.</li>
                 </ul>
         version_control_user:
