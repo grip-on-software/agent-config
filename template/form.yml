@@ -26,7 +26,6 @@ environment:
             option: [settings, 'projects']
         quality_report_name:
             field: string
-            required: true
             label: 'Quality report name'
             placeholder: 'abc'
             hint: 'The name of the project used internally by the quality report dashboard.'
