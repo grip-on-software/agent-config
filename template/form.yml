@@ -83,7 +83,7 @@ version_control:
         version_control_token:
             field: string
             label: 'Version control authentication token'
-            widget: password
+            widget: textarea
             hint: 'The password, deploy key or API token to login to the version control system with.'
         gitlab_group_name:
             field: string
