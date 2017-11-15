@@ -1,107 +1,10 @@
 <!doctype html>
-<html>
+<html lang="en">
     <head>
+		<meta charset="utf-8">
         <title>Agent configuration | GROS</title>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Vollkorn">
-        <style>
-            body {
-                font-family: 'Roboto', sans-serif;
-            }
-            .component {
-                position: relative;
-            }
-            .component .name {
-                font-size: 120%;
-                font-weight: bold;
-                text-align: left;
-                margin-right: 40px;
-            }
-            .component .clone {
-                position: absolute;
-                top: 2px;
-                right: 2px;
-            }
-            form {
-                border-bottom: 1px dashed #ccc;
-                width: 100%;
-            }
-            label {
-                position: relative;
-                width: 200px;
-                top: 6px;
-            }
-            .component {
-                border: 1px solid #bbb;
-                width: 375px;
-                display: inline-block;
-                padding: 4px;
-                vertical-align: top;
-            }
-            .required label {
-                font-weight: bold;
-            }
-            .field {
-                border-top: 1px dashed #ccc;
-                padding: 10px 5px 15px 5px;
-                position: relative;
-            }
-            .field input, .field select, .field textarea, .field button {
-                margin: -20px 0 0 175px;
-                width: 180px;
-            }
-            .field textarea {
-                margin-top: -15px;
-                vertical-align: baseline;
-            }
-            .field input[type="checkbox"] {
-                position: relative;
-                margin-left: 32px;
-                top: 4px;
-            }
-            .field fieldset input {
-                margin: 0;
-                width: 20px;
-            }
-            .field button {
-                font-size: 120%;
-                margin: 0 auto 0 auto;
-                display: block;
-            }
-            .hint {
-                font-size: 85%;
-                color: #333333;
-                text-align: right;
-            }
-            .hint .longer_hint {
-                display: none;
-                position: fixed;
-                bottom: 0;
-                left: 0;
-                text-align: justify;
-            }
-            .field:hover + .hint .longer_hint, .hint:hover .longer_hint, .field:focus-within + .hint .longer_hint {
-                display: block;
-                background: white;
-                border: 1px solid #aaaaaa;
-                padding: 3px;
-                width: 99%;
-                z-index: 499;
-            }
-            .field:focus-within + .hint .longer_hint {
-                z-index: 999;
-            }
-            .error {
-                background: #ffcccc;
-            }
-            .error_msg {
-                color: red;
-                margin: -15px 0 0 0;
-                padding: 5px 0;
-            }
-            button[type="submit"] {
-                margin-top: 20px;
-            }
-        </style>
+        <link rel="stylesheet" href="/res/form.css">
     </head>
     <body>
         <h1>Agent configuration</h1>
@@ -111,5 +14,7 @@
                 <button type="submit">Update</button>
             </div>
         </form>
+		<script src="/jquery/jquery.min.js"></script>
+		<script src="/res/form.js"></script>
     </body>
 </html>
