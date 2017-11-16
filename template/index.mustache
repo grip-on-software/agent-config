@@ -9,8 +9,10 @@
     <body>
         <h1>Agent status: <span class="status-{{status_class}}">{{status_text}}</span></h1>
 		<div>
-			<p>Latest scrape: {{{scrape_date}}}</p>
+			<p>Agent version: {{version}}</p>
+			<p>Latest data collection: {{{scrape_date}}}</p>
 			<p><a href="/edit">Edit configuration</a></p>
+			<p>Find out where the collected data is used for in the <a href="http://visualization.gros.example">GROS Visualization Hub</a></p>
 		</div>
     </body>
 </html>
