@@ -89,12 +89,12 @@ version_control:
             label: 'Version control SSH deploy key'
             widget: textarea
             hint: 'The custom private SSH part of a deploy key pair to login to the version control system with.'
-        gitlab_group_name:
+        version_control_group:
             field: string
-            label: 'GitLab group name'
+            label: 'Version control group name'
             placeholder: 'abc'
-            hint: 'The path name of the group on GitLab in which all the source code repositories are stored.'
-            longer_hint: 'This is found under the Settings for the group on GitLab, with setting name "Group path". This is only necessary if the quality reporting dashboard has no metrics for the source code repository.'
+            hint: 'The path name of the group on GitLab or the collection in TFS in which all the source code repositories are stored.'
+            longer_hint: 'This is found under the Settings for the group on GitLab, with setting name "Group path", or in the URL of the group (usually starting with and including <samp>tfs/</samp> and ending just before (<samp>/_git/</samp>). This is only necessary if the quality reporting dashboard has no metrics for the source code repository.'
 jenkins:
     name: Jenkins
     fields:

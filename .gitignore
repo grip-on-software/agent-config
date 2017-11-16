@@ -3,5 +3,6 @@ id_rsa.pub
 id_rsa
 env
 source_*
+data_sources.json
 credentials.cfg
 settings.cfg
