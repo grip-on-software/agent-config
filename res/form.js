@@ -46,4 +46,5 @@ $(document).ready(function() {
         component.remove();
         updateIds(componentName);
     });
+    $(".longer_hint a").attr("target", "_blank");
 });
