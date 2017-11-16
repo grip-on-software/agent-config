@@ -4,5 +4,6 @@ id_rsa
 env
 source_*
 data_sources.json
+preflight_date.txt
 credentials.cfg
 settings.cfg
