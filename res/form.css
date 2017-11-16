@@ -43,6 +43,10 @@ label {
 .field textarea {
     margin-top: 4px;
     vertical-align: baseline;
+    font-family: monospace;
+    font-size: 72%;
+    resize: vertical;
+    word-break: break-all;
 }
 .field input[type="checkbox"] {
     position: relative;
