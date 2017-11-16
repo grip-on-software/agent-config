@@ -29,7 +29,7 @@ environment:
             label: 'Quality report name'
             placeholder: 'abc'
             hint: 'The name of the project used internally by the quality report dashboard.'
-            longer_hint: 'Find the name on <a href="http://jenkins.example:8080/view/Quality%20reports/">the Quality reports view</a>; if you have a job name like <samp>quality-report-abc</samp> then this is <kdb>abc</kdb>.'
+            longer_hint: 'Find the name on <a href="http://jenkins.example:8080/view/Quality%20reports/">the Quality reports view</a>; if you have a job name like <samp>quality-report-abc</samp> then this is <kdb>abc</kdb>. Skip this if there is no quality report or if the definition does not contain any version control systems.'
             option: [settings, 'projects', fields.jira_key]
 version_control:
     name: Version control system
@@ -54,7 +54,7 @@ version_control:
             label: 'Version control domain'
             placeholder: 'gitlab.example'
             hint: 'The domain name plus optional port number where the version control system is hosted.'
-            longer_hint: 'For example <samp>gitlab.example</samp> or <samp>tfs.example:8080</samp>.'
+            longer_hint: 'For example <samp>gitlab.example</samp> or <samp>tfs.example:8080</samp>. Do not add the protocol to this value.'
         version_control_auth:
             field: string
             required: true
@@ -101,7 +101,7 @@ jenkins:
         jenkins_host:
             field: string
             label: 'Jenkins host'
-            placeholdeR: 'http://jenkins.example:8080'
+            placeholder: 'http://jenkins.example:8080'
             hint: 'The protocol, domain name and optionally port number of the Jenkins instance used for automated builds of the application developed by the team.'
             longer_hint: 'Get this from the main page of Jenkins by clicking on the logo in the top left and then copying the resulting URL, for example <samp>http://jenkins.example:8080</samp>.'
             option: [settings, 'jenkins', 'host']
