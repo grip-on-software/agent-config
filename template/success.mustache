@@ -1,14 +1,19 @@
 <!doctype html>
 <html lang="en">
     <head>
-		<meta charset="utf-8">
+        <meta charset="utf-8">
         <title>Agent configuration | GROS</title>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Vollkorn">
         <link rel="stylesheet" href="/res/index.css">
     </head>
     <body>
         <h1>Success</h1>
-		<p>The configuration has been saved. Return to the <a href="/">index</a> or <a href="/edit">edit</a> the configuration again to review the settings and state.</p>
-	</body>
+        <p>The configuration has been saved.
+            {{#config_url}}
+            You can <a href="{{config_url}}">inspect</a> the raw files.
+            {{/config_url}}
+            Return to the <a href="/">index</a> or <a href="/edit">edit</a> the configuration again to review the settings and state.
+        </p>
+    </body>
 </html>
 
