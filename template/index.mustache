@@ -1,22 +1,25 @@
 <!doctype html>
 <html lang="en">
     <head>
-		<meta charset="utf-8">
+        <meta charset="utf-8">
         <title>Agent status | GROS</title>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Vollkorn">
+        <link rel="stylesheet" href="/font-awesome/css/font-awesome.css">
         <link rel="stylesheet" href="/res/index.css">
     </head>
     <body>
         <h1>Agent status: <span class="status-{{status_class}}">{{status_text}}</span></h1>
-		<div>
-			<p>Agent version: {{version}}</p>
-			<p>Latest data collection: {{{scrape_date}}}
-				{{#export_url}}
-				(<a href="{{export_url}}">view</a>)
-				{{/export_url}}
-			</p>
-			<p><a href="/edit">Edit configuration</a></p>
-			<p>Find out where the collected data is used for in the <a href="http://visualization.gros.example">GROS Visualization Hub</a></p>
-		</div>
+        <div>
+            <p id="version">Agent version: {{version}} <button class="update">Check updates</button></p>
+            <p id="scrape">Latest data collection: {{{scrape_date}}}
+                {{#export_url}}
+                (<a href="{{export_url}}">view</a>)
+                {{/export_url}}
+            </p>
+            <p id="edit"><a href="/edit">Edit configuration</a></p>
+            <p id="link">Find out where the collected data is used for in the <a href="http://visualization.gros.example">GROS Visualization Hub</a></p>
+        </div>
+        <script src="/jquery/jquery.min.js"></script>
+        <script src="/res/index.js"></script>
     </body>
 </html>
