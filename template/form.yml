@@ -1,5 +1,6 @@
 environment:
     name: Project dashboard environment
+    icon: dashboard
     fields:
         bigboat_url:
             field: string
@@ -33,6 +34,7 @@ environment:
             option: [settings, 'projects', fields.jira_key]
 version_control:
     name: Version control system
+    icon: code-fork
     cloneable: true
     fields:
         version_control_type:
@@ -97,6 +99,7 @@ version_control:
             longer_hint: 'This is found under the Settings for the group on GitLab, with setting name "Group path", or in the URL of the collection in Team Foundation Server (usually starting with and including <samp>tfs/</samp> and ending just before <samp>/_git/</samp>). This is only necessary if the quality reporting dashboard has no metrics for the source code repository.'
 jenkins:
     name: Jenkins
+    icon: circle-o-notch
     fields:
         jenkins_host:
             field: string
