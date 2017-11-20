@@ -12,6 +12,17 @@ $(document).ready(function() {
                     (data.up_to_date ? 'Up to date' : 'Latest version: ' + data.version)
                 )
             );
-        })
+        }).fail(function(jqXHR, textStatus, errorThrown) {
+            var statusMessage = new String(errorThrown);
+            if (jqXHR.responseText !== '' &&
+                jqXHR.getResponseHeader('Content-Type') === 'application/json'
+            ) {
+                statusMessage = JSON.parse(jqXHR.responseText).message;
+            }
+            $(this).replaceWith($('<span></span>')
+                .attr('class', 'status-fail')
+                .text('Could not reach the controller: ' + statusMessage)
+            );
+        });
     });
 });
