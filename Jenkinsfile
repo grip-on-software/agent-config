@@ -35,7 +35,7 @@ pipeline {
         stage('Push') {
             when { branch 'master' }
             steps {
-                sh 'grep ".version.:" package.json | sed -E "s/^.*.version.: .([0-9.]+).,/\1/" > .version'
+                sh 'grep ".version.:" package.json | sed -E "s/^.*.version.: .([0-9.]+).,/\\1/" > .version'
                 sh 'docker tag $IMAGE:latest $IMAGE:$(cat .version)'
                 sh 'docker push $IMAGE:$(cat .version)'
                 sh 'docker push $IMAGE:latest'
