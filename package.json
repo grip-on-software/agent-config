@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "@ictu/gros-agent-config",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Web interface for status and configuration of the data gathering agent",
   "author": "Leon Helwerda <l.s.helwerda@liacs.leidenuniv.nl>",
   "scripts": {
