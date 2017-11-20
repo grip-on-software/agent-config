@@ -1,6 +1,10 @@
 pipeline {
     agent { label 'docker' }
 
+    environment {
+        IMAGE = "${env.DOCKER_REGISTRY}/gros-agent-config"
+    }
+
     options {
         gitLabConnection('gitlab')
         buildDiscarder(logRotator(numToKeepStr: '10'))
@@ -25,13 +29,16 @@ pipeline {
         stage('Build') {
             steps {
                 updateGitlabCommitStatus name: env.JOB_NAME, state: 'running'
-                sh 'docker build -t $DOCKER_REGISTRY/gros-agent-config .'
+                sh 'docker build -t $IMAGE:latest .'
             }
         }
         stage('Push') {
             when { branch 'master' }
             steps {
-                sh 'docker push $DOCKER_REGISTRY/gros-agent-config:latest'
+                sh 'grep ".version.:" package.json | sed -E "s/^.*.version.: .([0-9.]+).,/\1/" > .version'
+                sh 'docker tag $IMAGE:latest $IMAGE:$(cat .version)'
+                sh 'docker push $IMAGE:$(cat .version)'
+                sh 'docker push $IMAGE:latest'
             }
         }
     }
