@@ -46,7 +46,7 @@ version_control:
                 gitlab: 'GitLab'
                 github: 'GitHub'
                 tfs: 'Team Foundation Server'
-                svn: 'Subversion'
+                subversion: 'Subversion'
             widget: select
             hint: 'The type of version control system used.'
             longer_hint: 'For Git systems, we accept several flavors which provide us with richer data. Currently, only one source is accepted. If you use multiple version control systems, consider migrating them to one and provide the system with the most relevant source code.'
