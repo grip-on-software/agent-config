@@ -50,8 +50,7 @@ label {
 }
 .field input[type="checkbox"] {
     position: relative;
-    margin-left: 32px;
-    top: 4px;
+    top: -14px;
 }
 .field fieldset input {
     margin: 0;
@@ -92,6 +91,10 @@ label {
     color: red;
     margin: -15px 0 0 0;
     padding: 5px 0;
+}
+.toggle-expand, .toggle-collapse {
+	font-size: 200%;
+	text-align: center;
 }
 button[type="submit"] {
     margin-top: 20px;

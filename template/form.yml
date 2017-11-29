@@ -91,18 +91,27 @@ version_control:
             label: 'Version control SSH deploy key'
             widget: textarea
             hint: 'The custom private SSH part of a deploy key pair to login to the version control system with.'
+            expand: true
         version_control_group:
             field: string
             label: 'Version control group name'
             placeholder: 'abc'
             hint: 'The path name of the group on GitLab or the collection in TFS in which all the source code repositories are stored.'
             longer_hint: 'This is found under the Settings for the group on GitLab, with setting name "Group path", or in the URL of the collection in Team Foundation Server (usually starting with and including <samp>tfs/</samp> and ending just before <samp>/_git/</samp>). This is only necessary if the quality reporting dashboard has no metrics for the source code repository.'
+            expand: true
+        version_control_source:
+            field: string
+            label: 'Checkout URL'
+            hint: 'The URL to use to obtain data from the version control system. <strong>Only</strong> use this if the URLs are not provided by the project definition.'
+            longer_hint: 'This field is ignored if a quality report name is provided. If the project has no definition, then this is used to check out one repository and possibly find more repositories to collect. Prefer using the version control group for supported environments.'
+            expand: true
         version_control_unsafe:
             field: boolean
             widget: checkbox
             label: 'Disable host verification (unsafe)'
             hint: 'Do <strong>not</strong> enable this option unless verification errors arise when connecting to the version control system.'
             longer_hint: 'If the host has an SSL host key that cannot be verified against the scanned key, or it has an invalid HTTPS certificate, then this option can skip the verification checks when possible.'
+            expand: true
 jenkins:
     name: Jenkins
     icon: circle-o-notch
