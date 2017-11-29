@@ -97,6 +97,12 @@ version_control:
             placeholder: 'abc'
             hint: 'The path name of the group on GitLab or the collection in TFS in which all the source code repositories are stored.'
             longer_hint: 'This is found under the Settings for the group on GitLab, with setting name "Group path", or in the URL of the collection in Team Foundation Server (usually starting with and including <samp>tfs/</samp> and ending just before <samp>/_git/</samp>). This is only necessary if the quality reporting dashboard has no metrics for the source code repository.'
+        version_control_unsafe:
+            field: boolean
+            widget: checkbox
+            label: 'Disable host verification (unsafe)'
+            hint: 'Do <strong>not</strong> enable this option unless verification errors arise when connecting to the version control system.'
+            longer_hint: 'If the host has an SSL host key that cannot be verified against the scanned key, or it has an invalid HTTPS certificate, then this option can skip the verification checks when possible.'
 jenkins:
     name: Jenkins
     icon: circle-o-notch
