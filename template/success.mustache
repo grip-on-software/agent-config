@@ -6,12 +6,16 @@
     </head>
     <body>
         <h1>{{title}}</h1>
-        <p>The configuration has been saved.
+        <p>The configuration has been saved.</p>
+        <ul id="options">
             {{#config_url}}
-            You can <a href="{{config_url}}">inspect</a> the raw files.
+            <li>You can <a href="{{config_url}}">inspect</a> the raw files.</li>
             {{/config_url}}
-            Return to the <a href="/">index</a> or <a href="/edit">edit</a> the configuration again to review the settings and state.
-        </p>
+            <li><button class="scrape">Start</button> a scrape run to test the applied changes.</li>
+            <li><a href="/edit">Edit</a> the configuration again to review the settings.</li>
+            <li>Return to the <a href="/">index</a> to check the state.</li>
+        </ul>
+        <script src="/res/success.js"></script>
     </body>
 </html>
 
