@@ -37,11 +37,10 @@ label {
     position: relative;
 }
 .field input, .field select, .field textarea, .field button {
-    margin: -20px 0 0 175px;
+    margin: 4px 0 0 175px;
     width: 180px;
 }
 .field textarea {
-    margin-top: 4px;
     vertical-align: baseline;
     font-family: monospace;
     font-size: 72%;
@@ -49,8 +48,10 @@ label {
     word-break: break-all;
 }
 .field input[type="checkbox"] {
-    position: relative;
-    top: -14px;
+    position: absolute;
+    top: 14px;
+    left: 175px;
+    width: auto;
 }
 .field fieldset input {
     margin: 0;
@@ -93,8 +94,8 @@ label {
     padding: 5px 0;
 }
 .toggle-expand, .toggle-collapse {
-	font-size: 200%;
-	text-align: center;
+    font-size: 200%;
+    text-align: center;
 }
 button[type="submit"] {
     margin-top: 20px;
