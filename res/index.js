@@ -13,7 +13,7 @@ $(document).ready(function() {
                 )
             );
         }).fail(function(jqXHR, textStatus, errorThrown) {
-            var statusMessage = new String(errorThrown);
+            var statusMessage = String(errorThrown);
             if (jqXHR.responseText !== '' &&
                 jqXHR.getResponseHeader('Content-Type') === 'application/json'
             ) {

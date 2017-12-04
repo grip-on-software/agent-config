@@ -4,7 +4,7 @@ $(document).ready(function() {
 
         $(".component[id^=" + componentName + "]").each(function(index) {
             var component = $(this),
-                sequence = new String(index + 1);
+                sequence = String(index + 1);
             function replaceId(element, attribute) {
                 if (typeof attribute === "string") {
                     element.attr(attribute, function(i, value) {
