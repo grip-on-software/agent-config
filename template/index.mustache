@@ -7,7 +7,11 @@
     <body>
         <h1>{{title}}: <span class="status-{{status_class}}">{{status_text}}</span></h1>
         <div>
-            <p id="version">Agent version: {{version}} <button class="update">Check updates</button></p>
+            <p id="version">Agent version: {{version}}
+                {{#ssh_host}}
+                <button class="update">Check updates</button>
+                {{/ssh_host}}
+            </p>
             <p id="scrape">Latest data collection: {{{scrape_date}}}
                 {{#export_url}}
                 (<a href="{{export_url}}">view</a>)
