@@ -112,6 +112,18 @@ version_control:
             hint: 'Do <strong>not</strong> enable this option unless verification errors arise when connecting to the version control system.'
             longer_hint: 'If the host has an SSL host key that cannot be verified against the scanned key, or it has an invalid HTTPS certificate, then this option can skip the verification checks when possible.'
             expand: true
+        version_control_from_date:
+            field: string
+            label: 'Version control start date'
+            hint: 'Date from which to start collecting revisions.'
+            longer_hint: 'This allows for ignoring all commits authored before th given date in all repositories on this host, useful for migration schemes. The <samp>Version control tag</samp> option overrides this behavior. Only for Git repositories.'
+            expand: true
+        version_control_tag:
+            field: string
+            label: 'Version control tag'
+            hint: 'Tag from which to start collecting revisions.'
+            longer_hint: 'If the tag is found in a repository, then only the commiots leading to this that are collected. This can be useful for migration schemes. Only for Git repositories.'
+            expand: true
 jenkins:
     name: Jenkins
     icon: circle-o-notch
