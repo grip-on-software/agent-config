@@ -4,7 +4,8 @@ $(document).ready(function() {
         $(this).replaceWith(spinner);
         $.ajax('/scrape', {
             dataType: 'json',
-            context: spinner
+            context: spinner,
+            method: 'POST'
         }).done(function(data) {
             $(this).replaceWith($('<span></span>')
                 .attr('class', data.ok ? 'status-ok' : 'status-fail')
@@ -15,7 +16,10 @@ $(document).ready(function() {
             if (jqXHR.responseText !== '' &&
                 jqXHR.getResponseHeader('Content-Type') === 'application/json'
             ) {
-                statusMessage = JSON.parse(jqXHR.responseText).message;
+                var response = JSON.parse(jqXHR.responseText);
+                if (response.error && response.error.message) {
+                    statusMessage = response.error.message;
+                }
             }
             $(this).replaceWith($('<span></span>')
                 .attr('class', 'status-fail')
