@@ -29,7 +29,10 @@ pipeline {
         stage('Build') {
             steps {
                 updateGitlabCommitStatus name: env.JOB_NAME, state: 'running'
-                sh 'docker build -t $IMAGE:latest .'
+                withCredentials([file(credentialsId: 'agent-web-config', variable: 'AGENT_CONFIGURATION')]) {
+                    sh 'cp $AGENT_CONFIGURATION config.json'
+                    sh 'docker build -t $IMAGE:latest .'
+                }
             }
         }
         stage('Push') {

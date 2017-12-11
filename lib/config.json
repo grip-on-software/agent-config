@@ -1,0 +1,10 @@
+{
+    "listen_address": "127.0.0.1",
+    "listen_port": 8080,
+    "ssh_host": "-",
+    "agent_host": "agent",
+    "agent_port": 7070,
+    "export_path": "",
+    "config_path": "",
+    "key_path": ""
+}

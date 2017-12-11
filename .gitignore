@@ -1,4 +1,8 @@
+# Dependencies
 node_modules
+# Environment configuration
+/config*.json
+# Generated files
 id_rsa.pub
 id_rsa
 config/*
