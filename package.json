@@ -6,14 +6,15 @@
   "author": "Leon Helwerda <l.s.helwerda@liacs.leidenuniv.nl>",
   "scripts": {
     "dev": "cross-env NODE_ENV=development node lib/index.js",
-    "watch": "cross-env NODE_ENV=dev-sync nodemon lib/index.js",
+    "watch": "cross-env NODE_ENV=dev-sync nodemon -e js,json,mustache lib/index.js",
     "start": "cross-env NODE_ENV=production node lib/index.js"
   },
   "devDependencies": {
     "browser-sync": "^2.18.13",
     "connect-browser-sync": "^2.1.0",
     "cross-env": "^5.1.1",
-    "nodemon": "^1.12.1"
+    "nodemon": "^1.12.1",
+    "opn": "^5.1.0"
   },
   "dependencies": {
     "async": "^2.6.0",
