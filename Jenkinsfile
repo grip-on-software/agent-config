@@ -31,7 +31,7 @@ pipeline {
                 updateGitlabCommitStatus name: env.JOB_NAME, state: 'running'
                 withCredentials([file(credentialsId: 'agent-web-config', variable: 'AGENT_CONFIGURATION')]) {
                     sh 'cp $AGENT_CONFIGURATION config.json'
-                    sh 'docker build -t $IMAGE:latest .'
+                    sh 'docker build -t $IMAGE:latest . --build-arg NODE_ENV=production'
                 }
             }
         }
