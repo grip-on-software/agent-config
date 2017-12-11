@@ -2,6 +2,24 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+#link {
+	position: fixed;
+	bottom: 0;
+	font-size: 90%;
+}
+#link a {
+	border: 1px solid #1f77b4;
+	background-color: #ffffff;
+	color: #1f77b4;
+	border-radius: 4px;
+	padding: 2px;
+	text-decoration: none;
+}
+#link a:hover, #link a:focus {
+	background-color: #1f77b4;
+	color: #ffffff;
+}
+
 .status-ok {
 	color: hsl(141, 71%, 28%);
 }
