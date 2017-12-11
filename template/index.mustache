@@ -18,7 +18,9 @@
                 {{/export_url}}
             </p>
             <p id="edit"><a href="/edit">Edit configuration</a></p>
-            <p id="link">Find out where the collected data is used for in the <a href="http://visualization.gros.example">GROS Visualization Hub</a></p>
+            {{#visualization_url}}
+            <p id="link">Find out where the collected data is used for in the <a href="{{visualization_url}}">GROS Visualization Hub</a></p>
+            {{/visualization_url}}
         </div>
         <script src="/jquery/jquery.min.js"></script>
         <script src="/res/index.js"></script>

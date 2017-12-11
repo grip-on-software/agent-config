@@ -45,6 +45,8 @@ options and related environment variables are:
   (empty string), then the raw configuration is accessible via the web UI.
 - `key_path` (`IDENTITY_PATH`): The (relative) path in which SSH keys are 
   stored.
+- `visualization_url` (`VISUALIZATION_URL`): URL to link to from the index page 
+  of the web UI, when the viewer can see what happens with collected data.
 
 ## Building
 

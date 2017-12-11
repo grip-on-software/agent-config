@@ -6,5 +6,6 @@
     "agent_port": 7070,
     "export_path": "",
     "config_path": "",
-    "key_path": ""
+    "key_path": "",
+    "visualization_url": ""
 }
