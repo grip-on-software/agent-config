@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development node lib/index.js",
     "watch": "cross-env NODE_ENV=dev-sync nodemon -e js,json,mustache,yml --watch lib --watch template lib/index.js",
-    "start": "cross-env NODE_ENV=production node lib/index.js"
+    "production": "cross-env NODE_ENV=production node lib/index.js",
+    "start": "node lib/index.js"
   },
   "devDependencies": {
     "browser-sync": "^2.18.13",
