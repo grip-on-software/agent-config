@@ -44,8 +44,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'npm install -g jshint'
-                sh 'jshint lib res'
+                sh 'cd /usr/src/app && NODE_ENV=development npm install && npm run lint && npm test'
             }
         }
         stage('Push') {
