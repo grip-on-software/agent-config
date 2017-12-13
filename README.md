@@ -17,7 +17,7 @@ then you can run `npm install --production .` instead.
 ## Configuration
 
 Copy the file `lib/config.json` to `config.json` and adjust environmental 
-settings in that file. You can also provide the settings via environment 
+options in that file. You can also provide the settings via environment 
 variables when running the `npm run` command. The recognized configuration 
 options and related environment variables are:
 
