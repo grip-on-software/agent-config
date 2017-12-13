@@ -9,7 +9,26 @@
         <h1>{{title}}</h1>
         <p>Hover over the fields to see more hints about configuring the setting and information about the purpose of the data. When you select a field, then the hint will remain in view so that you can follow any links in the hints. Fields with bold names are required. Return to the <a href="/">index</a> to view current status.</p>
         <form action="" method="{{method}}" enctype="{{{enctype}}}">
-            {{{form}}}
+            {{#forms}}
+                <div class="component" id="{{id}}">
+                    <div class="name">
+                        {{#icon}}
+                            <i class="fa fa-{{icon}}"></i>
+                        {{/icon}}
+                        {{name}}
+                        {{#cloneable}}
+                            <span class="sequence">({{sequence}})</span>
+                        {{/cloneable}}
+                    </div>
+                    {{#cloneable}}
+                        <div class="clone">
+                            <button class="add" type="button">+</button>
+                            <button class="remove" type="button">-</button>
+                        </div>
+                    {{/cloneable}}
+                    {{{component}}}
+                </div>
+            {{/forms}}
             <div class="field">
                 <button type="submit">Update</button>
             </div>

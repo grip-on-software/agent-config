@@ -12,7 +12,10 @@
                 <button class="update">Check updates</button>
                 {{/ssh_host}}
             </p>
-            <p id="scrape">Latest data collection: {{{scrape_date}}}
+            <p id="scrape">Latest data collection:
+                <span class="{{scrape_class}}" title="{{scrape_title}}">
+                    {{scrape_date}}
+                </span>
                 {{#export_url}}
                 (<a href="{{export_url}}">view</a>)
                 {{/export_url}}
