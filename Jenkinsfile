@@ -35,6 +35,19 @@ pipeline {
                 }
             }
         }
+        stage('Test') {
+            agent {
+                docker {
+                    image '$IMAGE:latest'
+                    args '-u root'
+                    reuseNode true
+                }
+            }
+            steps {
+                sh 'npm install -g jshint'
+                sh 'jshint lib res'
+            }
+        }
         stage('Push') {
             when { branch 'master' }
             steps {
