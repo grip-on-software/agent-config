@@ -9,13 +9,15 @@
     "watch": "cross-env NODE_ENV=dev-sync nodemon -e js,json,mustache,yml --watch lib --watch template lib/index.js",
     "production": "cross-env NODE_ENV=production node lib/index.js",
     "start": "node lib/index.js",
-    "lint": "cross-env NODE_ENV=development ./node_modules/jshint/bin/jshint lib res",
-    "test": "cross-env NODE_ENV=development ./node_modules/mocha/bin/mocha tests"
+    "lint": "cross-env NODE_ENV=development jshint lib res",
+    "test": "cross-env NODE_ENV=development mocha tests"
   },
   "devDependencies": {
     "browser-sync": "^2.18.13",
+    "chai": "^4.1.2",
     "connect-browser-sync": "^2.1.0",
     "cross-env": "^5.1.1",
+    "jsdom": "^11.5.1",
     "jshint": "^2.9.5",
     "mocha": "^4.0.1",
     "nodemon": "^1.12.1",
