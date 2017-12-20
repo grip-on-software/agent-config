@@ -1,0 +1,18 @@
+# Dependencies
+node_modules
+# Environment configuration
+/config*.json
+# Generated files
+id_rsa.pub
+id_rsa
+config/*
+export/*
+env
+source_*
+VERSION
+data_sources.json
+preflight_date.txt
+credentials.cfg
+settings.cfg
+# Non-production files
+tests/
