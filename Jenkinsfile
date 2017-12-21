@@ -39,7 +39,7 @@ pipeline {
             agent {
                 docker {
                     image '$IMAGE:latest'
-                    args '-u root'
+                    args '-u root -v $PWD/tests:/usr/src/app/tests'
                     reuseNode true
                 }
             }
