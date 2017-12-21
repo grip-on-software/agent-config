@@ -39,12 +39,12 @@ pipeline {
             agent {
                 docker {
                     image '$IMAGE:latest'
-                    args '-u root -v $PWD/tests:/usr/src/app/tests'
+                    args '-u root'
                     reuseNode true
                 }
             }
             steps {
-                sh 'cd /usr/src/app && NODE_ENV=development npm install && npm run lint && npm test'
+                sh 'cp -r $PWD/tests /usr/src/app/tests && cd /usr/src/app && NODE_ENV=development npm install && npm run lint && npm test'
             }
         }
         stage('Push') {
