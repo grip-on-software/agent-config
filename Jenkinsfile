@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         IMAGE = "${env.DOCKER_REGISTRY}/gros-agent-config"
+        SCANNER_HOME = tool name: 'SonarQube Scanner 3', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
     }
 
     options {
@@ -45,6 +46,13 @@ pipeline {
             }
             steps {
                 sh 'cp -r $PWD/tests /usr/src/app/tests && cd /usr/src/app && NODE_ENV=development npm install && npm run lint && npm test'
+            }
+        }
+        stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv('SonarQube') {
+                    sh '${SCANNER_HOME}/bin/sonar-scanner -Dsonar.branch=$BRANCH_NAME'
+                }
             }
         }
         stage('Push') {
