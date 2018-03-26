@@ -46,6 +46,8 @@ pipeline {
             }
             steps {
                 sh 'cp -r $PWD/tests /usr/src/app/tests && cd /usr/src/app && NODE_ENV=development npm install && npm run lint && npm test'
+                sh 'cp /usr/src/app/test-report.xml $PWD/test-report.xml'
+                sh 'cp -r /usr/src/app/coverage $PWD/coverage'
             }
         }
         stage('SonarQube Analysis') {
