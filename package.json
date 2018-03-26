@@ -10,7 +10,7 @@
     "production": "cross-env NODE_ENV=production node lib/index.js",
     "start": "node lib/index.js",
     "lint": "cross-env NODE_ENV=development jshint lib res",
-    "test": "cross-env NODE_ENV=development nyc --report-dir=$PWD/coverage --reporter=lcov --reporter=text mocha --reporter=spec --reporter=mocha-sonar-generic-test-coverage --reporter-options outputFile=$PWD/test-report.xml tests"
+    "test": "cross-env NODE_ENV=development nyc --reporter=lcov --reporter=text mocha --reporter=spec --reporter=mocha-sonar-generic-test-coverage --reporter-options outputFile=test-report.xml tests"
   },
   "devDependencies": {
     "browser-sync": "^2.18.13",
