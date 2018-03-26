@@ -15,6 +15,6 @@ preflight_date.txt
 credentials.cfg
 settings.cfg
 # Test reports
-test-report.xml
 .nyc_output/
 coverage/
+test-report/

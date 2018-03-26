@@ -1,0 +1,12 @@
+{
+    "reporterEnabled": "spec, mocha-junit-reporter, mocha-simple-html-reporter, mocha-sonar-generic-test-coverage",
+    "mochaJunitReporterReporterOptions": {
+        "mochaFile": "test-report/junit/junit.xml"
+    },
+    "mochaSimpleHtmlReporterReporterOptions": {
+        "output": "test-report/html/htmlReport.html"
+    },
+    "mochaSonarGenericTestCoverageReporterOptions": {
+        "outputFile": "test-report/generic.xml"
+    }
+}
