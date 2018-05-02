@@ -55,7 +55,7 @@ $(document).ready(function() {
                 .append($("<i></i>").attr("class", "fa fa-angle-double-down"));
             toggle.on("click", function() {
                 var expand = $(this).attr("class") == "toggle-expand";
-                component.find(".expand")
+                $(this).parents(".component").find(".expand")
                     .css("display", expand ? "block" : "none");
                 $(this).attr("class", "toggle-" + (expand ? "collapse" : "expand"))
                     .find("i").attr("class", "fa fa-angle-double-" + (expand ? "up" : "down"));
