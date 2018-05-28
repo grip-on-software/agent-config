@@ -14,6 +14,7 @@ data_sources.json
 preflight_date.txt
 credentials.cfg
 settings.cfg
+cert/
 # Test reports
 .nyc_output/
 coverage/
