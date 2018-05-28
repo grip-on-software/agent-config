@@ -44,8 +44,9 @@ pipeline {
         stage('Build') {
             steps {
                 checkout scm
-                withCredentials([file(credentialsId: 'agent-web-config', variable: 'AGENT_CONFIGURATION')]) {
+                withCredentials([file(credentialsId: 'agent-web-config', variable: 'AGENT_CONFIGURATION'), file(credentialsId: 'upload-server-certificate', variable: 'SERVER_CERTIFICATE')]) {
                     sh 'cp $AGENT_CONFIGURATION config.json'
+                    sh 'cp $SERVER_CERTIFICATE wwwgros.crt'
                     sh 'docker build -t $IMAGE:$IMAGE_TAG . --build-arg NODE_ENV=production'
                 }
             }
