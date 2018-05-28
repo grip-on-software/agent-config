@@ -53,12 +53,11 @@ pipeline {
         }
         stage('Test preconfigure') {
             steps {
-                sh 'mkdir cert config'
+                sh 'mkdir cert'
                 sh 'openssl genrsa -out cert/server.key 2048'
                 sh 'openssl rsa -in cert/server.key -out cert/server.crt.key'
                 sh 'openssl req -sha256 -new -key cert/server.crt.key -out cert/server.csr -subj /CN=localhost'
                 sh 'openssl x509 -req -sha256 -days 365 -in cert/server.csr -signkey cert/server.crt.key -out cert/server.crt'
-                sh 'echo test-dev > config/VERSION'
             }
         }
         stage('Test') {
@@ -70,7 +69,7 @@ pipeline {
             }
             steps {
                 sh 'NODE_ENV=development npm install && npm run lint'
-                sh 'SSH_HTTPS_PORT=8443 SSH_HTTPS_CERT=cert/server.crt SSH_HOST=localhost AGENT_PORT=7070 AGENT_HOST=localhost UPDATE_TIMEOUT=100 SCRAPE_TIMEOUT=100 CONFIG_PATH=config npm test'
+                sh 'SSH_HTTPS_PORT=8443 SSH_HTTPS_CERT=cert/server.crt SSH_HOST=localhost AGENT_PORT=7070 AGENT_HOST=localhost UPDATE_TIMEOUT=100 SCRAPE_TIMEOUT=100 npm test'
             }
         }
         stage('SonarQube Analysis') {
