@@ -6,7 +6,8 @@ const request = require('supertest'),
       assert = require('chai').assert,
       jsdom = require('jsdom'),
       { JSDOM } = jsdom,
-      app = require('../../lib/app');
+      app = require('../../lib/app'),
+      { loadPageWithScripts } = require('../res');
 
 const submit_data = {
     'bigboat_url': 'http://bigboat.example',
@@ -32,13 +33,24 @@ const submit_data = {
 };
 
 describe('Edit', function() {
-    it('Should provide a form', function() {
-        return request(app).get('/edit')
+    it('Should provide a form', function(done) {
+        request(app).get('/edit')
             .expect('Content-Type', 'text/html')
             .expect(200)
             .then(response => {
-                const { document } = (new JSDOM(response.text)).window;
-                assert.equal(document.querySelectorAll(".component").length, 3);
+                loadPageWithScripts(app, response, done).then(window => {
+                    const { document } = window;
+                    window.$(document).ready(() => {
+                        assert.equal(document.querySelectorAll(".component").length, 3);
+                        document.querySelector(".component .clone button.add").click();
+                        assert.equal(document.querySelectorAll(".component").length, 4);
+                        done();
+                    });
+                }).catch((err) => {
+                    done(err);
+                });
+            }).catch((err) => {
+                done(err);
             });
     });
 
@@ -105,5 +117,24 @@ describe('Edit', function() {
         }).catch((err) => {
             done(err);
         });
+    });
+
+    it('Should perform a scrape after submitting the form', function(done) {
+        request(app).post('/edit')
+            .send(submit_data)
+            .then(response => {
+                loadPageWithScripts(app, response, done).then(window => {
+                    const { document } = window;
+                    window.$(document).ready(() => {
+                        document.querySelector("#options button.scrape").click();
+                        assert.equal(document.querySelector("#options button.scrape"), null);
+                        done();
+                    });
+                }).catch((err) => {
+                    done(err);
+                });
+            }).catch((err) => {
+                done(err);
+            });
     });
 });
