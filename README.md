@@ -27,6 +27,12 @@ options and related environment variables are:
 - `listen_port` (`LISTEN_PORT`): The port to listen to.
 - `ssh_host` (`SSH_HOST`): The hostname of the controller API to connect to in 
   order to check for version updates of the agent.
+- `ssh_https_port` (`SSH_HTTPS_PORT`): Port of the controller API to connect to
+  in order to check for version updates of the agent.
+- `ssh_https_cert` (`SSH_HTTPS_CERT`): Certificate of the controller API to
+  validate during the connection to check for version updates.
+- `update_timeout` (`UPDATE_TIMEOUT`): Milliseconds to wait for the version
+  update check response before considering the connection to be unavailable.
 - `agent_host` (`AGENT_HOST`): The hostname of the agent related to this 
   configuration web UI. This is where the scraper API is running. This can be 
   a local hostname,
@@ -36,6 +42,8 @@ options and related environment variables are:
   hostname to share any configuration.
 - `agent_port` (`AGENT_PORT`): The port of the agent where the scraper API is 
   running.
+- `scrape_timeout` (`SCRAPE_TIMEOUT`): Milliseconds to wait for the scraper API
+  before considering the connection to be unavailable.
 - `export_path` (`EXPORT_PATH`): The (relative) path in which dropins and 
   exported data from the agent are stored, including data source information 
   and scrape status. If this path is not the current working directory (empty 
