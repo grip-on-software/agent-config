@@ -6,11 +6,15 @@ $(document).ready(function() {
             dataType: 'json',
             context: spinner
         }).done(function(data) {
+            var message = data.message;
+            if (!message) {
+                message = (data.up_to_date ? 'Up to date' :
+                    'Latest version: ' + data.version
+                );
+            }
             $(this).replaceWith($('<span></span>')
                 .attr('class', data.up_to_date ? 'status-ok' : 'status-fail')
-                .text(data.message ? data.message :
-                    (data.up_to_date ? 'Up to date' : 'Latest version: ' + data.version)
-                )
+                .text(message)
             );
         }).fail(function(jqXHR, textStatus, errorThrown) {
             var statusMessage = String(errorThrown);

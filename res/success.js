@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $('#options button.scrape').on('click', function() { 
+    $('#options button.scrape').on('click', function() {
         var spinner = $('<i></i>').attr('class', 'fa fa-spinner fa-spin');
         $(this).replaceWith(spinner);
         $.ajax('/scrape', {
