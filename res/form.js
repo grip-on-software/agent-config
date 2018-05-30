@@ -63,4 +63,6 @@ $(document).ready(function() {
             component.append(toggle);
         }
     });
+
+    window.form_is_ready = true;
 });

@@ -13,6 +13,8 @@
     "test": "rm -rf test-config test-export test-ssh && mkdir -p test-report/junit test-report/html test-config test-export test-ssh && echo 'test-dev' > test-config/VERSION && cross-env NODE_ENV=development CONFIG_PATH=test-config EXPORT_PATH=test-export IDENTITY_PATH=test-ssh nyc --reporter=lcov --reporter=text mocha --reporter=mocha-multi-reporters --reporter-options configFile=test-config.json tests/*.js tests/**/*.js"
   },
   "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-plugin-istanbul": "^4.1.6",
     "browser-sync": "^2.18.13",
     "chai": "^4.1.2",
     "connect-browser-sync": "^2.1.0",
