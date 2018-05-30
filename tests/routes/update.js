@@ -89,6 +89,27 @@ describe('Update', function() {
             });
     });
 
+    it('Should provide a message if the upstream has a status', function(done) {
+        if (!checkEnvironment(app)) {
+            return this.skip();
+        }
+        const upstreamServer = createUpstream((req, res) => {
+            res.writeHead(403);
+            res.end("I'm afraid I can't let you do that");
+        });
+        request(app).get('/update')
+            .expect("Content-Type", "application/json")
+            .expect(200, {
+                up_to_date: false,
+                message: "I'm afraid I can't let you do that"
+            })
+            .end((err, res) => {
+                upstreamServer.close();
+                if (err) { done(err); }
+                else { done(); }
+            });
+    });
+
     it('Should provide an error if the upstream is too slow', function(done) {
         if (!checkEnvironment(app)) {
             return this.skip();

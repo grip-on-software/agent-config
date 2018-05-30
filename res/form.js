@@ -9,7 +9,7 @@ $(document).ready(function() {
                 if (typeof attribute === "string") {
                     element.attr(attribute, function(i, value) {
                         if (typeof value === "undefined") {
-                            return;
+                            return null;
                         }
                         var replacement = '$1' + componentName + '_' + sequence + '$2';
                         return value.replace(pattern, replacement);
@@ -54,7 +54,7 @@ $(document).ready(function() {
             var toggle = $("<div></div>").attr("class", "toggle-expand")
                 .append($("<i></i>").attr("class", "fa fa-angle-double-down"));
             toggle.on("click", function() {
-                var expand = $(this).attr("class") == "toggle-expand";
+                var expand = $(this).attr("class") === "toggle-expand";
                 $(this).parents(".component").find(".expand")
                     .css("display", expand ? "block" : "none");
                 $(this).attr("class", "toggle-" + (expand ? "collapse" : "expand"))
