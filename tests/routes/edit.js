@@ -41,9 +41,21 @@ describe('Edit', function() {
                 loadPageWithScripts(app, response, done).then(window => {
                     const { document } = window;
                     window.$(document).ready(() => {
+                        // Test clone buttons
                         assert.equal(document.querySelectorAll(".component").length, 3);
                         document.querySelector(".component .clone button.add").click();
                         assert.equal(document.querySelectorAll(".component").length, 4);
+                        document.querySelector(".component .clone button.remove").click();
+                        assert.equal(document.querySelectorAll(".component").length, 3);
+
+                        // Test expand button
+                        assert.equal(document.querySelector(".component .expand").style.display, "none");
+                        document.querySelector(".component .toggle-expand").click();
+                        assert.equal(document.querySelectorAll(".component .toggle-collapse").length, 1);
+                        assert.equal(document.querySelector(".component .expand").style.display, "block");
+                        document.querySelector(".component .toggle-collapse").click();
+                        assert.equal(document.querySelectorAll(".component .toggle-collapse").length, 0);
+                        assert.equal(document.querySelector(".component .expand").style.display, "none");
                         done();
                     });
                 }).catch((err) => {
@@ -118,10 +130,11 @@ describe('Edit', function() {
             done(err);
         });
     });
+});
 
+describe('Edit success', function() {
     it('Should perform a scrape after submitting the form', function(done) {
-        request(app).post('/edit')
-            .send(submit_data)
+        request(app).post('/edit').send(submit_data)
             .then(response => {
                 loadPageWithScripts(app, response, done).then(window => {
                     const { document } = window;

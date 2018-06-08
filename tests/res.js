@@ -43,6 +43,8 @@ exports.loadPageWithScripts = function(app, response, done) {
                 }).catch((err) => {
                     reject(err);
                 });
+            }).catch((err) => {
+                reject(err);
             });
         });
     }, Promise.resolve());
@@ -50,6 +52,8 @@ exports.loadPageWithScripts = function(app, response, done) {
     return new Promise((resolve, reject) => {
         promise.then(() => {
             resolve(window);
+        }).catch((err) => {
+            reject(err);
         });
     });
 };

@@ -3,31 +3,15 @@
 'use strict';
 
 const request = require('supertest'),
-      express = require('express'),
-      http = require('http'),
-      app = require('../../lib/app');
-
-const createUpstream = function(handler) {
-    const upstreamApp = express(),
-          upstreamServer = http.createServer(upstreamApp);
-    upstreamApp.post('/scrape', handler);
-    upstreamServer.listen(app.options.agent_port);
-    return upstreamServer;
-};
-
-const checkEnvironment = function(app) {
-    if (app.options.agent_host === 'localhost') {
-        return true;
-    }
-    return false;
-};
+      app = require('../../lib/app'),
+      { createAgent, checkAgentEnvironment } = require('../server');
 
 describe('Scrape', function() {
     it('Should request the scrape to start', function(done) {
-        if (!checkEnvironment(app)) {
+        if (!checkAgentEnvironment(app)) {
             return this.skip();
         }
-        const upstreamServer = createUpstream((req, res) => {
+        const upstreamServer = createAgent(app, (req, res) => {
             res.statusCode = 201;
             res.setHeader("Content-Type", "application/json");
             res.end(JSON.stringify({ok: true}));
@@ -57,7 +41,7 @@ describe('Scrape', function() {
     });
 
     it('Should provide an error if the agent is unavailable', function() {
-        if (!checkEnvironment(app)) {
+        if (!checkAgentEnvironment(app)) {
             return;
         }
         return request(app).post('/scrape')
@@ -71,10 +55,10 @@ describe('Scrape', function() {
     });
 
     it('Should provide a message if the agent has a status', function(done) {
-        if (!checkEnvironment(app)) {
+        if (!checkAgentEnvironment(app)) {
             return this.skip();
         }
-        const upstreamServer = createUpstream((req, res) => {
+        const upstreamServer = createAgent(app, (req, res) => {
             res.writeHead(403);
             res.end("I'm afraid I can't let you do that");
         });
@@ -94,10 +78,10 @@ describe('Scrape', function() {
     });
 
     it('Should provide an error if the agent is too slow', function(done) {
-        if (!checkEnvironment(app)) {
+        if (!checkAgentEnvironment(app)) {
             return this.skip();
         }
-        const upstreamServer = createUpstream((req, res) => {
+        const upstreamServer = createAgent(app, (req, res) => {
             setTimeout(function() {
                 res.end();
             }, app.options.scrape_timeout + 100);

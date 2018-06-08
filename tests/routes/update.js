@@ -3,37 +3,15 @@
 'use strict';
 
 const request = require('supertest'),
-      express = require('express'),
-      fs = require('fs'),
-      https = require('https'),
-      app = require('../../lib/app');
-
-const createUpstream = function(handler) {
-    const cert = app.options.ssh_https_cert,
-          upstreamApp = express(),
-          upstreamServer = https.createServer({
-              key: fs.readFileSync(`${cert}.key`),
-              cert: fs.readFileSync(cert)
-          }, upstreamApp);
-    upstreamApp.get('/auth/version.py', handler);
-    upstreamServer.listen(app.options.ssh_https_port);
-    return upstreamServer;
-};
-
-const checkEnvironment = function(app) {
-    const cert = app.options.ssh_https_cert;
-    if (app.options.ssh_host === 'localhost' && fs.existsSync(`${cert}.key`)) {
-        return true;
-    }
-    return false;
-};
+      app = require('../../lib/app'),
+      { checkUpdateEnvironment, createUpdate } = require('../server');
 
 describe('Update', function() {
     it('Should check for updates', function(done) {
-        if (!checkEnvironment(app)) {
+        if (!checkUpdateEnvironment(app)) {
             return this.skip();
         }
-        const upstreamServer = createUpstream((req, res) => {
+        const upstreamServer = createUpdate(app, (req, res) => {
             res.setHeader("Content-Type", "application/json");
             res.end(JSON.stringify({
                 up_to_date: false,
@@ -78,7 +56,7 @@ describe('Update', function() {
     });
 
     it('Should provide an error if the upstream is unavailable', function() {
-        if (!checkEnvironment(app)) {
+        if (!checkUpdateEnvironment(app)) {
             return this.skip();
         }
         return request(app).get('/update')
@@ -90,10 +68,10 @@ describe('Update', function() {
     });
 
     it('Should provide a message if the upstream has a status', function(done) {
-        if (!checkEnvironment(app)) {
+        if (!checkUpdateEnvironment(app)) {
             return this.skip();
         }
-        const upstreamServer = createUpstream((req, res) => {
+        const upstreamServer = createUpdate(app, (req, res) => {
             res.writeHead(403);
             res.end("I'm afraid I can't let you do that");
         });
@@ -111,10 +89,10 @@ describe('Update', function() {
     });
 
     it('Should provide an error if the upstream is too slow', function(done) {
-        if (!checkEnvironment(app)) {
+        if (!checkUpdateEnvironment(app)) {
             return this.skip();
         }
-        const upstreamServer = createUpstream((req, res) => {
+        const upstreamServer = createUpdate(app, (req, res) => {
             setTimeout(function() {
                 res.end();
             }, app.options.update_timeout + 100);
