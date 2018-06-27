@@ -25,6 +25,10 @@ options and related environment variables are:
   should usually be a local address such as `127.0.0.1` or the bind-any address 
   `0.0.0.0` to listen to all remote connections.
 - `listen_port` (`LISTEN_PORT`): The port to listen to.
+- `listen_host` (`LISTEN_HOST`): The hostname of the configuration web UI that
+  users must use to connect to the interface. If provided, then other domain
+  name and port combinations result in a Forbidden error, counteracting DNS 
+  rebinding attacks.
 - `ssh_host` (`SSH_HOST`): The hostname of the controller API to connect to in 
   order to check for version updates of the agent.
 - `ssh_https_port` (`SSH_HTTPS_PORT`): Port of the controller API to connect to
