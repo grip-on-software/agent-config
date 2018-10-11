@@ -16,6 +16,8 @@ const instrument = function(sourceCode, filename) {
   });
 };
 
+global.__coverage__ = global.__coverage__ || {};
+
 exports.loadPageWithScripts = function(app, response, done) {
     const virtualConsole = new jsdom.VirtualConsole();
     // Fail the test immediately on uncaught/JSDOM errors
@@ -28,6 +30,7 @@ exports.loadPageWithScripts = function(app, response, done) {
         pretendToBeVisual: true,
         virtualConsole
     })).window;
+    window.__coverage__ = global.__coverage__;
     const { document } = window;
     const promise = Array.from(
         document.querySelectorAll('script'), script => script.src

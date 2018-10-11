@@ -9,6 +9,8 @@ const request = require('supertest'),
       app = require('../../lib/app'),
       { loadPageWithScripts } = require('../res');
 
+global.__coverage__ = global.__coverage__ || {};
+
 const submit_data = {
     'bigboat_url': 'http://bigboat.example',
     'bigboat_key': 'my-api-key',
@@ -72,7 +74,9 @@ describe('Edit', function() {
             .expect('Content-Type', 'text/html')
             .expect(200)
             .then(response => {
-                const { document } = (new JSDOM(response.text)).window;
+                const { window } = new JSDOM(response.text);
+                window.__coverage__ = global.__coverage__;
+                const { document } = window;
                 assert.equal(document.querySelector("h1").textContent, "Success");
             });
     });
@@ -87,7 +91,9 @@ describe('Edit', function() {
             .expect('Content-Type', 'text/html')
             .expect(200)
             .then(response => {
-                const { document } = (new JSDOM(response.text)).window;
+                const { window } = new JSDOM(response.text);
+                window.__coverage__ = global.__coverage__;
+                const { document } = window;
                 assert.equal(document.querySelector("h1").textContent, "Success");
                 assert.equal(document.querySelectorAll("li").length, 2);
             });
@@ -99,7 +105,9 @@ describe('Edit', function() {
                 .expect('Content-Type', 'text/html')
                 .expect(200)
                 .then(response => {
-                    const { document } = (new JSDOM(response.text)).window;
+                    const { window } = new JSDOM(response.text);
+                    window.__coverage__ = global.__coverage__;
+                    const { document } = window;
                     assert.equal(document.querySelectorAll(".component").length, 4);
                     assert.equal(document.querySelectorAll("input[value=\"<existing>\"]").length, 3);
                     assert.equal(document.querySelector("textarea#id_version_control_2\\[version_control_key\\]").textContent, "<existing>");
@@ -120,7 +128,9 @@ describe('Edit', function() {
                 .expect('Content-Type', 'text/html')
                 .expect(200)
                 .then(response => {
-                    const { document } = (new JSDOM(response.text)).window;
+                    const { window } = new JSDOM(response.text);
+                    window.__coverage__ = global.__coverage__;
+                    const { document } = window;
                     assert.equal(document.querySelector("input#id_version_control_1\\[version_control_source\\]").value, "http://gitlab.example/example/repo");
                     done();
                 }).catch((err) => {
