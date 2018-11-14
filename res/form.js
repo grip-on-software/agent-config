@@ -52,13 +52,13 @@ $(document).ready(function() {
         var component = $(this);
         if (component.find(".expand").css("display", "none").length) {
             var toggle = $("<div></div>").attr("class", "toggle-expand")
-                .append($("<i></i>").attr("class", "fa fa-angle-double-down"));
+                .append($("<i></i>").attr("class", "fas fa-angle-double-down"));
             toggle.on("click", function() {
                 var expand = $(this).attr("class") === "toggle-expand";
                 $(this).parents(".component").find(".expand")
                     .css("display", expand ? "block" : "none");
                 $(this).attr("class", "toggle-" + (expand ? "collapse" : "expand"))
-                    .find("i").attr("class", "fa fa-angle-double-" + (expand ? "up" : "down"));
+                    .find("i").attr("class", "fas fa-angle-double-" + (expand ? "up" : "down"));
             });
             component.append(toggle);
         }

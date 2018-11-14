@@ -1,6 +1,6 @@
 environment:
     name: Project dashboard environment
-    icon: dashboard
+    icon: 'fas fa-tachometer-alt'
     fields:
         bigboat_url:
             field: string
@@ -34,7 +34,7 @@ environment:
             option: [settings, 'projects', fields.jira_key]
 version_control:
     name: Version control system
-    icon: code-fork
+    icon: 'fas fa-code-fork'
     cloneable: true
     fields:
         version_control_type:
@@ -126,7 +126,7 @@ version_control:
             expand: true
 jenkins:
     name: Jenkins
-    icon: circle-o-notch
+    icon: 'fab fa-jenkins'
     fields:
         jenkins_host:
             field: string
