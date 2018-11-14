@@ -35,4 +35,14 @@ describe('Static', function() {
                     .expect(404, done);
             });
     });
+
+    it('Should provide jQuery JS files', function() {
+        return request(app).get('/jquery/jquery.min.js')
+            .expect(200);
+    });
+
+    it('Should provide font-awesome CSS files', function() {
+        return request(app).get('/font-awesome/all.min.css')
+            .expect(200);
+    });
 });

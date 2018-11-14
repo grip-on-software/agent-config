@@ -1,6 +1,6 @@
 $(document).ready(function() {
     $('#options button.scrape').on('click', function() {
-        var spinner = $('<i></i>').attr('class', 'fa fa-spinner fa-spin');
+        var spinner = $('<i></i>').attr('class', 'fas fa-spinner fa-spin');
         $(this).replaceWith(spinner);
         $.ajax('/scrape', {
             dataType: 'json',

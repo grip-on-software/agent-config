@@ -13,7 +13,7 @@
                 <div class="component" id="{{id}}">
                     <div class="name">
                         {{#icon}}
-                            <i class="fa fa-{{icon}}"></i>
+                            <i class="{{icon}}"></i>
                         {{/icon}}
                         {{name}}
                         {{#cloneable}}
@@ -22,8 +22,12 @@
                     </div>
                     {{#cloneable}}
                         <div class="clone">
-                            <button class="add" type="button">+</button>
-                            <button class="remove" type="button">-</button>
+                            <button class="add" type="button">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                            <button class="remove" type="button">
+                                <i class="fas fa-minus"></i>
+                            </button>
                         </div>
                     {{/cloneable}}
                     {{{component}}}
