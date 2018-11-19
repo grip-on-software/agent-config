@@ -42,7 +42,12 @@ describe('Static', function() {
     });
 
     it('Should provide font-awesome CSS files', function() {
-        return request(app).get('/font-awesome/all.min.css')
+        return request(app).get('/font-awesome/css/all.min.css')
+            .expect(200);
+    });
+
+    it('Should provide font-awesome webfont files', function() {
+        return request(app).get('/font-awesome/webfonts/fa-solid-900.woff2')
             .expect(200);
     });
 });
