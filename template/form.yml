@@ -34,7 +34,7 @@ environment:
             option: [settings, 'projects', fields.jira_key]
 version_control:
     name: Version control system
-    icon: 'fas fa-code-fork'
+    icon: 'fas fa-code-branch'
     cloneable: true
     fields:
         version_control_type:
