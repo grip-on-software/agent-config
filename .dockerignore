@@ -2,6 +2,11 @@
 node_modules
 # Environment configuration
 /config*.json
+# Repository configuration
+.dockerignore
+.gitignore
+# Build files
+Jenkinsfile
 # Generated files
 id_rsa.pub
 id_rsa
@@ -14,5 +19,9 @@ data_sources.json
 preflight_date.txt
 credentials.cfg
 settings.cfg
+# Test reports
+.nyc_output/
+coverage/
+test-report/
 # Non-production files
 tests/
