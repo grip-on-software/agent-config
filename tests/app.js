@@ -10,6 +10,7 @@ const request = require('supertest'),
 describe('Application', function() {
     var env, app;
     beforeEach(function() {
+        this.timeout(4000);
         env = process.env;
         process.env = {
             'NODE_ENV': 'dev-sync',
