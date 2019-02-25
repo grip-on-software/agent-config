@@ -100,11 +100,19 @@ version_control:
             longer_hint: 'This is found under the Settings for the group on GitLab, with setting name "Group path", or in the URL of the collection in Team Foundation Server (usually starting with and including <samp>tfs/</samp> and ending just before <samp>/_git/</samp>). This is only necessary if the quality reporting dashboard has no metrics for the source code repository.'
             expand: true
         version_control_source:
-            field: string
+            field: map
+            fields:
+                key:
+                    field: string
+                    label: 'Name'
+                value:
+                    field: string
+                    label: 'URL'
             label: 'Checkout URL'
-            hint: 'The URL to use to obtain data from the version control system. <strong>Only</strong> use this if the URLs are not provided by the project definition.'
+            hint: 'The URLs to use to obtain data from the version control system. <strong>Only</strong> use this if the URLs are not provided by the project definition.'
             longer_hint: 'This field is ignored if a quality report name is provided. If the project has no definition, then this is used to check out one repository and possibly find more repositories to collect. Prefer using the version control group for supported environments.'
             expand: true
+            cloneable: true
         version_control_unsafe:
             field: boolean
             widget: checkbox

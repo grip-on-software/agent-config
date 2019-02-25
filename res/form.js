@@ -1,8 +1,12 @@
 $(document).ready(function() {
-    function updateIds(componentName) {
-        var pattern = new RegExp("([\\w_]*)" + componentName + "_\\d+([\\w_\\[\\]]+)");
+    function updateIds(componentName, componentClass) {
+        var pattern = new RegExp("([\\w_]*)" +
+            componentName.replace(/([.?*+^$[\]\\(){}|-])/g, "\\$1") +
+            "_\\d+([\\w_\\[\\]]+)"
+        );
 
-        $(".component[id^=" + componentName + "]").each(function(index) {
+        var components = $("." + componentClass + "[id^=\"" + componentName + "\"]");
+        components.each(function(index) {
             var component = $(this),
                 sequence = String(index + 1);
             function replaceId(element, attribute) {
@@ -22,29 +26,34 @@ $(document).ready(function() {
                 }
             }
             component.attr('id', componentName + '_' + sequence);
-            component.find('.name .sequence').text('(' + sequence + ')');
+            component.find('.sequence').text('(' + sequence + ')');
+            component.find('.clone .remove').attr('disabled',
+                components.length === 1
+            );
 
             replaceId(component.find('.field label'), 'for');
-            replaceId(component.find('.field input, .field select, .field textarea, .field button'),
+            replaceId(component.find('.field input, .field select, .field textarea, .field button, .item'),
                       ['id', 'name']);
         });
     }
     $(".component .clone button.add").on("click", function() {
         var component = $(this).parent().parent(),
+            componentClass = component.attr('class'),
             componentId = component.attr('id'),
             componentName = componentId.substr(0, componentId.lastIndexOf('_'));
 
         var textNode = $(document.createTextNode(' '));
         component.clone(true).insertAfter(textNode.insertAfter(component));
-        updateIds(componentName);
+        updateIds(componentName, componentClass);
     });
     $(".component .clone button.remove").on("click", function() {
         var component = $(this).parent().parent(),
             componentId = component.attr('id'),
+            componentClass = component.attr('class'),
             componentName = componentId.substr(0, componentId.lastIndexOf('_'));
 
         component.remove();
-        updateIds(componentName);
+        updateIds(componentName, componentClass);
     });
     $(".longer_hint a").attr("target", "_blank");
 

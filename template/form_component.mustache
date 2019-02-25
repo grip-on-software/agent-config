@@ -1,0 +1,22 @@
+                <div class="{{class}}" id="{{id}}">
+                    <div class="name">
+                        {{#icon}}
+                            <i class="{{icon}}"></i>
+                        {{/icon}}
+                        {{name}}
+                        {{#cloneable}}
+                            <span class="sequence">({{sequence}})</span>
+                        {{/cloneable}}
+                    </div>
+                    {{#cloneable}}
+                        <div class="clone">
+                            <button class="add" type="button">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                            <button class="remove" type="button" {{remove}}>
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    {{/cloneable}}
+                    {{{component}}}
+                </div>

@@ -22,7 +22,8 @@ const submit_data = {
     'version_control_1[version_control_user]': 'git',
     'version_control_1[version_control_token]': 'apikey',
     'version_control_1[version_control_group]': 'example',
-    'version_control_1[version_control_source]': 'http://gitlab.example/example/repo',
+    'version_control_1[version_control_source]_1[key]': 'testrepo',
+    'version_control_1[version_control_source]_1[value]': 'http://gitlab.example/example/repo',
     'version_control_2[version_control_type]': 'tfs',
     'version_control_2[version_control_domain]': 'tfs.example',
     'version_control_2[version_control_auth]': 'deploy_key',
@@ -131,7 +132,8 @@ describe('Edit', function() {
                     const { window } = new JSDOM(response.text);
                     window.__coverage__ = global.__coverage__;
                     const { document } = window;
-                    assert.equal(document.querySelector("input#id_version_control_1\\[version_control_source\\]").value, "http://gitlab.example/example/repo");
+                    assert.equal(document.querySelector("input#id_version_control_1\\[version_control_source\\]_1\\[key\\]").value, "testrepo");
+                    assert.equal(document.querySelector("input#id_version_control_1\\[version_control_source\\]_1\\[value\\]").value, "http://gitlab.example/example/repo");
                     done();
                 }).catch((err) => {
                     done(err);
