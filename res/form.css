@@ -62,6 +62,39 @@ label {
     margin: 0 auto 0 auto;
     display: block;
 }
+.map .field {
+    border-top: none;
+    padding-bottom: 5px;
+    font-size: 80%;
+    text-align: right;
+}
+.map .field label {
+    vertical-align: top;
+}
+.map .field input, .map .field select, .map .field textarea, .map .field button {
+    margin: 0px 0px 0px 10px;
+}
+.item {
+    position: relative;
+}
+.item .clone {
+    top: 35px;
+    left: auto;
+    right: auto;
+}
+.item .clone button {
+    margin: initial;
+    font-size: 80%;
+    width: initial;
+    display: block;
+	position: relative;
+	z-index: 99;
+}
+.item .sequence {
+    position: absolute;
+    top: 10px;
+    font-weight: bold;
+}
 .hint {
     font-size: 85%;
     color: #333333;
