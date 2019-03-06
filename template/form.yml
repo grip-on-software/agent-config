@@ -117,8 +117,15 @@ version_control:
             field: boolean
             widget: checkbox
             label: 'Disable host verification (unsafe)'
-            hint: 'Do <strong>not</strong> enable this option unless verification errors arise when connecting to the version control system.'
+            hint: 'Do <strong>not</strong> disable host verification unless certificate errors arise when connecting to the version control system.'
             longer_hint: 'If the host has an SSL host key that cannot be verified against the scanned key, or it has an invalid HTTPS certificate, then this option can skip the verification checks when possible.'
+            expand: true
+        version_control_skip_stats:
+            field: boolean
+            widget: checkbox
+            label: 'Disable commit volume collection'
+            hint: 'Do <strong>not</strong> disable commit volume collection unless performance issues arise when collecting differences from the version control system.'
+            longer_hint: 'If the repositories provide large bulks of differences, then this option can skip the commit volume calculations based on the differences.'
             expand: true
         version_control_from_date:
             field: string

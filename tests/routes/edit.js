@@ -30,6 +30,7 @@ const submit_data = {
     'version_control_2[version_control_user]': 'tfs\\user',
     'version_control_2[version_control_key]': 'deploykey',
     'version_control_2[version_control_unsafe]': '1',
+    'version_control_2[version_control_skip_stats]': '1',
     'jenkins_host': 'http://jenkins.example',
     'jenkins_user': 'api-user',
     'jenkins_token': 'api-pass'
