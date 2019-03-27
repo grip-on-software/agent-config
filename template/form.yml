@@ -23,8 +23,8 @@ environment:
             label: 'JIRA key prefix'
             placeholder: 'ABC'
             hint: 'The JIRA prefix used to identify issues in the JIRA board.'
-            longer_hint: 'If you have issues like <samp>ABC-1234</samp>, then this is <kbd>ABC</kbd>. You can also find it on <a href="http://jira.example/jira/secure/BrowseProjects.jspa?selectedCategory=all&selectedProjectType=all">the Browse Projects</a> page where it is in the "Key" column. If you use multiple JIRA boards in your project (which share the same dashboard environment) then provide all of them, the main project key first.'
-            option: [settings, ['projects', 'subprojects']]
+            longer_hint: 'If you have issues like <samp>ABC-1234</samp>, then this is <kbd>ABC</kbd>. You can also find it on <a href="http://jira.example/jira/secure/BrowseProjects.jspa?selectedCategory=all&selectedProjectType=all">the Browse Projects</a> page where it is in the "Key" column. If you use multiple JIRA boards in your project (which share the same dashboard environment) then the main project key only.'
+            option: [settings, 'projects']
         quality_report_name:
             field: string
             label: 'Quality report name'
