@@ -4,14 +4,12 @@ environment:
     fields:
         bigboat_url:
             field: string
-            required: true
             label: 'BigBoat URL'
             hint: 'The URL to the location of the BigBoat dashboard.'
             placeholder: 'http://bigboat.example'
             option: [settings, 'bigboat', 'host']
         bigboat_key:
             field: string
-            required: true
             label: 'BigBoat key'
             widget: password
             hint: 'An API key of the BigBoat dashboard.'
