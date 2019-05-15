@@ -98,3 +98,16 @@ can be started using respectively `npm run dev`, `npm run watch` or `npm start`
 (the latter is started automatically when using Docker). Use the autoreload 
 support by starting `npm run watch` in a separate terminal, then you can 
 develop and instantly see the changes take effect.
+
+## Testing
+
+Run the unit tests using `npm test`. You may want to override the configuration 
+options, especially if you if you have a `config.json` file with options 
+different from the default, or if you do not have privileges to open certain 
+ports. You can adjust these options by setting environment variables:
+
+```
+LISTEN_ADDR= SSH_HTTPS_PORT=8443 SSH_HTTPS_CERT=cert/server.crt \
+SSH_HOST=localhost AGENT_PORT=7070 AGENT_HOST=localhost UPDATE_TIMEOUT=100 \
+SCRAPE_TIMEOUT=100 LISTEN_HOST= npm test
+```
