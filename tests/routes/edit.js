@@ -12,10 +12,11 @@ const request = require('supertest'),
 global.__coverage__ = global.__coverage__ || {};
 
 const submit_data = {
-    'bigboat_url': 'http://bigboat.example',
-    'bigboat_key': 'my-api-key',
-    'jira_key': 'TEST',
-    'quality_report_name': 'test',
+    'environment[bigboat_url]': 'http://bigboat.example',
+    'environment[bigboat_key]': 'my-api-key',
+    'environment[jira_key]': 'TEST',
+    'environment[quality_report_name]_1[key]': 'TEST',
+    'environment[quality_report_name]_1[value]': 'test',
     'version_control_1[version_control_type]': 'gitlab',
     'version_control_1[version_control_domain]': 'gitlab.example',
     'version_control_1[version_control_auth]': 'gitlab_api',
@@ -31,9 +32,10 @@ const submit_data = {
     'version_control_2[version_control_key]': 'deploykey',
     'version_control_2[version_control_unsafe]': '1',
     'version_control_2[version_control_skip_stats]': '1',
-    'jenkins_host': 'http://jenkins.example',
-    'jenkins_user': 'api-user',
-    'jenkins_token': 'api-pass'
+    'jenkins_1[jenkins_host]': 'jenkins.example',
+    'jenkins_1[jenkins_user]': 'api-user',
+    'jenkins_1[jenkins_token]': 'api-pass',
+    'jenkins_1[jenkins_unsafe]': '1'
 };
 
 describe('Edit', function() {
@@ -47,9 +49,9 @@ describe('Edit', function() {
                     window.$(document).ready(() => {
                         // Test clone buttons
                         assert.equal(document.querySelectorAll(".component").length, 3);
-                        document.querySelector(".component .clone button.add").click();
+                        document.querySelector(".component > .clone button.add").click();
                         assert.equal(document.querySelectorAll(".component").length, 4);
-                        document.querySelector(".component .clone button.remove").click();
+                        document.querySelector(".component > .clone button.remove").click();
                         assert.equal(document.querySelectorAll(".component").length, 3);
 
                         // Test expand button
@@ -124,7 +126,8 @@ describe('Edit', function() {
 
     it('Should provide source when submitting no quality report', function(done) {
         request(app).post('/edit').send(Object.assign({}, submit_data, {
-            'quality_report_name': '',
+            'environment[quality_report_name]_1[key]': '',
+            'environment[quality_report_name]_1[value]': '',
         })).then(() => {
             request(app).get('/edit')
                 .expect('Content-Type', 'text/html')
