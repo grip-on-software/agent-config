@@ -48,6 +48,7 @@ pipeline {
                     sh 'cp $AGENT_CONFIGURATION config.json'
                     sh 'cp $SERVER_CERTIFICATE wwwgros.crt'
                     sh 'docker build -t $IMAGE:$IMAGE_TAG . --build-arg NODE_ENV=production'
+                    sh 'docker push $IMAGE:$IMAGE_TAG'
                 }
             }
         }
@@ -85,7 +86,6 @@ pipeline {
                 sh 'grep ".version.:" package.json | sed -E "s/^.*.version.: .([0-9.]+).,/\\1/" > .version'
                 sh 'docker tag $IMAGE:latest $IMAGE:$(cat .version)'
                 sh 'docker push $IMAGE:$(cat .version)'
-                sh 'docker push $IMAGE:latest'
             }
         }
         stage('Status') {
