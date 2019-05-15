@@ -21,15 +21,22 @@ environment:
             label: 'JIRA key prefix'
             placeholder: 'ABC'
             hint: 'The JIRA prefix used to identify issues in the JIRA board.'
-            longer_hint: 'If you have issues like <samp>ABC-1234</samp>, then this is <kbd>ABC</kbd>. You can also find it on <a href="http://jira.example/jira/secure/BrowseProjects.jspa?selectedCategory=all&selectedProjectType=all">the Browse Projects</a> page where it is in the "Key" column. If you use multiple JIRA boards in your project (which share the same dashboard environment) then the main project key only.'
-            option: [settings, 'projects']
+            longer_hint: 'If you have issues like <samp>ABC-1234</samp>, then this is <kbd>ABC</kbd>. You can also find it on <a href="http://jira.example/jira/secure/BrowseProjects.jspa?selectedCategory=all&selectedProjectType=all">the Browse Projects</a> page where it is in the "Key" column. If you use multiple JIRA boards in your project (which share the same dashboard environment) then the main project key only. You can specify additional projects to obtain in the "Quality report name" field.'
         quality_report_name:
-            field: string
+            field: map
+            fields:
+                key:
+                    field: string
+                    label: 'JIRA key'
+                    placeholder: 'ABC'
+                value:
+                    field: string
+                    label: 'HQ name'
+                    placeholder: 'abc'
             label: 'Quality report name'
-            placeholder: 'abc'
             hint: 'The name of the project used internally by the quality report dashboard.'
-            longer_hint: 'Find the name on <a href="http://jenkins.example:8080/view/Quality%20reports/">the Quality reports view</a>; if you have a job name like <samp>quality-report-abc</samp> then this is <kdb>abc</kdb>. Skip this if there is no quality report or if the definition does not contain any version control systems.'
-            option: [settings, 'projects', fields.jira_key]
+            longer_hint: 'Find the name on <a href="http://jenkins.example:8080/view/Quality%20reports/">the Quality reports view</a>; if you have a job name like <samp>quality-report-abc</samp> then this is <kdb>abc</kdb>. Skip this if there is no quality report or if the definition does not contain any source information for the sources we obtain (e.g., version control). To collect multiple projects in the agent, include for each project their JIRA key and quality report name.'
+            cloneable: true
 version_control:
     name: Version control system
     icon: 'fas fa-code-branch'
@@ -49,7 +56,7 @@ version_control:
             hint: 'The type of version control system used.'
             longer_hint: 'For Git systems, we accept several flavors which provide us with richer data. Currently, only one source is accepted. If you use multiple version control systems, consider migrating them to one and provide the system with the most relevant source code.'
         version_control_domain:
-            field: string
+            field: host
             required: true
             label: 'Version control domain'
             placeholder: 'gitlab.example'
@@ -140,23 +147,29 @@ version_control:
 jenkins:
     name: Jenkins
     icon: 'fab fa-jenkins'
+    cloneable: true
     fields:
         jenkins_host:
-            field: string
-            label: 'Jenkins host'
-            placeholder: 'http://jenkins.example:8080'
-            hint: 'The protocol, domain name and optionally port number of the Jenkins instance used for automated builds of the application developed by the team.'
+            field: host
+            required: true
+            label: 'Jenkins domain'
+            placeholder: 'jenkins.example:8080'
+            hint: 'The domain name and optionally port number of the Jenkins instance used for automated builds of the application developed by the team.'
             longer_hint: 'Get this from the main page of Jenkins by clicking on the logo in the top left and then copying the resulting URL, for example <samp>http://jenkins.example:8080</samp>.'
-            option: [settings, 'jenkins', 'host']
         jenkins_user:
             field: string
             label: 'Jenkins username'
             hint: 'The username to log in to Jenkins with. This is only necessary if Jenkins is completely restricted to logged-in users, since we only need read access.'
-            option: [settings, 'jenkins', 'username']
         jenkins_token:
             field: string
             label: 'Jenkins token'
             widget: password
             hint: 'The password to log in to the Jenkins API with. This is only necessary if Jenkins is completely restricted to logged-in users.'
             longer_hint: 'Use an API token instead of the plain (LDAP) password. You can find the API token when you are logged in by clicking on your name in the top right, then Configure, and finally press <kbd><samp>Show API Token...</samp></kbd>'
-            option: [settings, 'jenkins', 'password']
+        jenkins_unsafe:
+            field: boolean
+            widget: checkbox
+            label: 'Disable host verification (unsafe)'
+            hint: 'Do <strong>not</strong> disable host verification unless certificate errors arise when connecting to the build system.'
+            longer_hint: 'If the  Jenkins host has an SSL host key that cannot be verified against the scanned key, or it has an invalid HTTPS certificate, then this option can skip the verification checks when possible.'
+            expand: true
