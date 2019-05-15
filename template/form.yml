@@ -6,7 +6,7 @@ environment:
             field: string
             label: 'BigBoat URL'
             hint: 'The URL to the location of the BigBoat dashboard.'
-            placeholder: 'http://bigboat.example'
+            placeholder: '{{bigboat_placeholder}}'
             option: [settings, 'bigboat', 'host']
         bigboat_key:
             field: string
@@ -21,7 +21,7 @@ environment:
             label: 'JIRA key prefix'
             placeholder: 'ABC'
             hint: 'The JIRA prefix used to identify issues in the JIRA board.'
-            longer_hint: 'If you have issues like <samp>ABC-1234</samp>, then this is <kbd>ABC</kbd>. You can also find it on <a href="http://jira.example/jira/secure/BrowseProjects.jspa?selectedCategory=all&selectedProjectType=all">the Browse Projects</a> page where it is in the "Key" column. If you use multiple JIRA boards in your project (which share the same dashboard environment) then the main project key only. You can specify additional projects to obtain in the "Quality report name" field.'
+            longer_hint: 'If you have issues like <samp>ABC-1234</samp>, then this is <kbd>ABC</kbd>. You can also find it on <a href="{{jira_url}}/secure/BrowseProjects.jspa?selectedCategory=all&selectedProjectType=all">the Browse Projects</a> page where it is in the "Key" column. If you use multiple JIRA boards in your project (which share the same dashboard environment) then the main project key only. You can specify additional projects to obtain in the "Quality report name" field.'
         quality_report_name:
             field: map
             fields:
@@ -35,7 +35,7 @@ environment:
                     placeholder: 'abc'
             label: 'Quality report name'
             hint: 'The name of the project used internally by the quality report dashboard.'
-            longer_hint: 'Find the name on <a href="http://jenkins.example:8080/view/Quality%20reports/">the Quality reports view</a>; if you have a job name like <samp>quality-report-abc</samp> then this is <kdb>abc</kdb>. Skip this if there is no quality report or if the definition does not contain any source information for the sources we obtain (e.g., version control). To collect multiple projects in the agent, include for each project their JIRA key and quality report name.'
+            longer_hint: 'Find the name in <a href="{{quality_report_definition_url}}">the Quality reports definitions</a>; if you have a repository like <samp>quality-report-abc-definition</samp> then this is <kdb>abc</kdb>. Skip this if there is no quality report or if the definition does not contain any source information for the sources we obtain (e.g., version control). To collect multiple projects in the agent, include for each project their JIRA key and quality report name.'
             cloneable: true
 version_control:
     name: Version control system
@@ -59,9 +59,9 @@ version_control:
             field: host
             required: true
             label: 'Version control domain'
-            placeholder: 'gitlab.example'
+            placeholder: '{{version_control_placeholder}}'
             hint: 'The domain name plus optional port number where the version control system is hosted.'
-            longer_hint: 'For example <samp>gitlab.example</samp> or <samp>tfs.example:8080</samp>. Do not add the protocol to this value.'
+            longer_hint: 'For example <samp>{{version_control_placeholder}}</samp> or <samp>{{version_control_port_sample}}</samp>. Do not add the protocol to this value.'
         version_control_auth:
             field: string
             required: true
@@ -153,9 +153,9 @@ jenkins:
             field: host
             required: true
             label: 'Jenkins domain'
-            placeholder: 'jenkins.example:8080'
+            placeholder: '{{jenkins_placeholder}}'
             hint: 'The domain name and optionally port number of the Jenkins instance used for automated builds of the application developed by the team.'
-            longer_hint: 'Get this from the main page of Jenkins by clicking on the logo in the top left and then copying the resulting URL, for example <samp>http://jenkins.example:8080</samp>.'
+            longer_hint: 'Get this from the main page of Jenkins by clicking on the logo in the top left and then copying the resulting URL, for example <samp>{{jenkins_placeholder}}</samp>.'
         jenkins_user:
             field: string
             label: 'Jenkins username'

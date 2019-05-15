@@ -19,7 +19,7 @@ then you can run `npm install --production .` instead.
 Copy the file `lib/config.json` to `config.json` and adjust environmental 
 options in that file. You can also provide the settings via environment 
 variables when running the `npm run` command. The recognized configuration 
-options and related environment variables are:
+options and related environment variables (uppercase variants) are:
 
 - `listen_address` (`LISTEN_ADDR`): The bind IP address to listen to. This 
   should usually be a local address such as `127.0.0.1` or the bind-any address 
@@ -58,7 +58,21 @@ options and related environment variables are:
 - `key_path` (`IDENTITY_PATH`): The (relative) path in which SSH keys are 
   stored.
 - `visualization_url` (`VISUALIZATION_URL`): URL to link to from the index page 
-  of the web UI, when the viewer can see what happens with collected data.
+  of the web UI, where the viewer can see what happens with collected data.
+
+Additionally, the following options can be adjusted in order to display 
+different help snippets (example placeholders, information links) in the agent 
+form editor:
+
+- `jira_url`: The base URL to a JIRA instance where the JIRA boards are found.
+- `quality_report_definition_url`: A URL to a page which displays project 
+  definition repository names for the quality report source.
+- `bigboat_placeholder`: An example base URL of a BigBoat instance.
+- `version_control_placeholder`: An example domain name of a version control 
+  system, preferably a simple one.
+- `version_control_port_sample`: An example domain name of a version control 
+  system including a port number.
+- `jenkins_placeholder`: An example domain name of a Jenkins CI build server.
 
 ## Building
 

@@ -12,5 +12,11 @@
     "export_path": "",
     "config_path": "",
     "key_path": "",
-    "visualization_url": ""
+    "visualization_url": "",
+    "jira_url": "http://jira.example",
+    "quality_report_definition_url": "http://quality-report.example",
+    "bigboat_placeholder": "http://bigboat.example",
+    "version_control_placeholder": "gitlab.example",
+    "version_control_port_sample": "tfs.example:8080",
+    "jenkins_placeholder": "jenkins.example:8080"
 }
