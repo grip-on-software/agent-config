@@ -78,7 +78,7 @@ describe('Index', function() {
                     assert.include(document.querySelector("#version").textContent, "unknown");
                     assert.equal(document.querySelectorAll("#version .update").length, 0);
                     assert.equal(document.querySelectorAll("#scrape a").length, 0);
-                    assert.equal(document.querySelectorAll("a#link").length, 0);
+                    assert.equal(document.querySelectorAll("p#link").length, 0);
                     done();
                 }).catch((err) => {
                     done(err);

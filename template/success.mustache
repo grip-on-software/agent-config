@@ -5,18 +5,20 @@
         <link rel="stylesheet" href="/res/index.css">
     </head>
     <body>
-        <h1>{{title}}</h1>
-        <p>The configuration has been saved.</p>
-        <ul id="options">
-            {{#config_url}}
-            <li>You can <a href="{{config_url}}">inspect</a> the raw files.</li>
-            {{/config_url}}
-			{{#scrape_url}}
-            <li>You can perform a scrape run to test the applied changes: <button class="scrape">Start</button></li>
-			{{/scrape_url}}
-            <li>You can <a href="/edit">edit</a> the configuration again to review the settings.</li>
-            <li>You can return to the <a href="/">index</a> to check the state.</li>
-        </ul>
+        <main role="main">
+            <h1>{{title}}</h1>
+            <p>The configuration has been saved.</p>
+            <ul id="options">
+                {{#config_url}}
+                <li>You can <a href="{{config_url}}">inspect</a> the raw files.</li>
+                {{/config_url}}
+			    {{#scrape_url}}
+                <li>You can perform a scrape run to test the applied changes: <button class="scrape">Start</button></li>
+			    {{/scrape_url}}
+                <li>You can <a href="/edit">edit</a> the configuration again to review the settings.</li>
+                <li>You can return to the <a href="/">index</a> to check the state.</li>
+            </ul>
+        </main>
         <script src="/jquery/jquery.js"></script>
         <script src="/res/success.js"></script>
     </body>

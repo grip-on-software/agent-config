@@ -6,16 +6,18 @@
         <link rel="stylesheet" href="/res/form.css">
     </head>
     <body>
-        <h1>{{title}}</h1>
-        <p>Hover over the fields to see more hints about configuring the setting and information about the purpose of the data. When you select a field, then the hint will remain in view so that you can follow any links in the hints. Fields with bold names are required. Return to the <a href="/">index</a> to view current status.</p>
-        <form action="" method="{{method}}" enctype="{{{enctype}}}">
-            {{#forms}}
-                {{>form_component}}
-            {{/forms}}
-            <div class="field">
-                <button type="submit">Update</button>
-            </div>
-        </form>
+        <main role="main">
+            <h1>{{title}}</h1>
+            <p>Hover over the fields to see more hints about configuring the setting and information about the purpose of the data. When you select a field, then the hint will remain in view so that you can follow any links in the hints. Fields with bold names are required. Return to the <a href="/">index</a> to view current status.</p>
+            <form action="" method="{{method}}" enctype="{{{enctype}}}">
+                {{#forms}}
+                    {{>form_component}}
+                {{/forms}}
+                <div class="field">
+                    <button type="submit">Update</button>
+                </div>
+            </form>
+        </main>
         <script src="/jquery/jquery.min.js"></script>
         <script src="/res/form.js"></script>
     </body>
