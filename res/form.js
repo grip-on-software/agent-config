@@ -47,7 +47,7 @@ $(document).ready(function() {
         var select = newComponent.find('select');
         component.find('select').each(function(index) {
             select.get(index).selectedIndex = this.selectedIndex;
-        })
+        });
         newComponent.insertAfter(textNode.insertAfter(component));
         updateIds(componentName, componentClass);
     });
