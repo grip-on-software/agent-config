@@ -4,6 +4,7 @@
 
 const request = require('supertest'),
       assert = require('chai').assert,
+      _ = require('lodash'),
       jsdom = require('jsdom'),
       { JSDOM } = jsdom,
       app = require('../../lib/app'),
@@ -138,6 +139,69 @@ describe('Edit', function() {
                     const { document } = window;
                     assert.equal(document.querySelector("input#id_version_control_1\\[version_control_source\\]_1\\[key\\]").value, "testrepo");
                     assert.equal(document.querySelector("input#id_version_control_1\\[version_control_source\\]_1\\[value\\]").value, "http://gitlab.example/example/repo");
+                    done();
+                }).catch((err) => {
+                    done(err);
+                });
+        }).catch((err) => {
+            done(err);
+        });
+    });
+
+    it('Should accept multiple projects with quality reports', function(done) {
+        request(app).post('/edit').send(Object.assign({}, submit_data, {
+            'environment[quality_report_name]_2[key]': 'EX',
+            'environment[quality_report_name]_2[value]': 'example',
+        })).then(() => {
+            request(app).get('/edit')
+                .expect('Content-Type', 'text/html')
+                .expect(200)
+                .then(response => {
+                    const { window } = new JSDOM(response.text);
+                    window.__coverage__ = global.__coverage__;
+                    const { document } = window;
+                    assert.equal(document.querySelector("input#id_environment\\[quality_report_name\\]_2\\[key\\]").value, "EX");
+                    assert.equal(document.querySelector("input#id_environment\\[quality_report_name\\]_2\\[value\\]").value, "example");
+                    done();
+                }).catch((err) => {
+                    done(err);
+                });
+        }).catch((err) => {
+            done(err);
+        });
+    });
+
+    it('Should provide correct configuration when adding and removing sources', (done) => {
+        const new_data = _.assign({},
+            _.transform(submit_data, (result, value, key) => {
+                if (!key.startsWith('version_control_1')) {
+                    const newKey = key.replace('version_control_2', 'version_control_1');
+                    result[newKey] = value;
+                }
+            }, {}),
+            {'version_control_1[version_control_group]': 'TfsCollection'},
+            {
+                'jenkins_2[jenkins_host]': 'ci.example',
+                'jenkins_2[jenkins_user]': 'newuser',
+                'jenkins_2[jenkins_token]': 'newpass',
+                'jenkins_2[jenkins_unsafe]': ''
+            }
+        );
+        request(app).post('/edit').send(new_data).then(() => {
+            request(app).get('/edit')
+                .expect('Content-Type', 'text/html')
+                .expect(200)
+                .then(response => {
+                    const { window } = new JSDOM(response.text);
+                    window.__coverage__ = global.__coverage__;
+                    const { document } = window;
+                    assert.equal(document.querySelector("input#id_version_control_1\\[version_control_domain\\]").value, "tfs.example");
+                    assert.equal(document.querySelector("input#id_version_control_1\\[version_control_user\\]").value, "tfs\\user");
+                    assert.equal(document.querySelector("input#id_version_control_1\\[version_control_group\\]").value, "TfsCollection");
+                    assert.equal(document.querySelector("input#id_jenkins_1\\[jenkins_host\\]").value, "jenkins.example");
+                    assert.equal(document.querySelector("input#id_jenkins_1\\[jenkins_user\\]").value, "api-user");
+                    assert.equal(document.querySelector("input#id_jenkins_2\\[jenkins_host\\]").value, "ci.example");
+                    assert.equal(document.querySelector("input#id_jenkins_2\\[jenkins_user\\]").value, "newuser");
                     done();
                 }).catch((err) => {
                     done(err);

@@ -43,7 +43,12 @@ $(document).ready(function() {
             componentName = componentId.substr(0, componentId.lastIndexOf('_'));
 
         var textNode = $(document.createTextNode(' '));
-        component.clone(true).insertAfter(textNode.insertAfter(component));
+        var newComponent = component.clone(true);
+        var select = newComponent.find('select');
+        component.find('select').each(function(index) {
+            select.get(index).selectedIndex = this.selectedIndex;
+        })
+        newComponent.insertAfter(textNode.insertAfter(component));
         updateIds(componentName, componentClass);
     });
     $(".component .clone button.remove").on("click", function() {
