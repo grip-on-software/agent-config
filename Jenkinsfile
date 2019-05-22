@@ -26,6 +26,7 @@ pipeline {
         always {
             publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, includes: 'junit/**/*,html/**/*', keepAll: false, reportDir: 'test-report', reportFiles: 'html/htmlReport.html', reportName: 'Test Report', reportTitles: ''])
             publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'coverage', reportFiles: 'lcov-report/index.html', reportName: 'Coverage', reportTitles: ''])
+            archiveArtifacts artifacts: 'accessibility.csv', excludes: '', onlyIfSuccessful: true
             junit 'test-report/junit/*.xml'
         }
     }

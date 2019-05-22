@@ -13,13 +13,15 @@
     "test": "rm -rf test-config test-export test-ssh && mkdir -p test-report/junit test-report/html test-config test-export test-ssh && echo 'test-dev' > test-config/VERSION && cross-env NODE_ENV=development CONFIG_PATH=test-config EXPORT_PATH=test-export IDENTITY_PATH=test-ssh nyc --reporter=lcov --reporter=text mocha --reporter=mocha-multi-reporters --reporter-options configFile=test-config.json tests/*.js tests/**/*.js"
   },
   "devDependencies": {
+    "@ictu/axe-reports": "^1.1.11",
+    "axe-core": "^3.2.2",
     "babel-core": "^6.26.3",
     "babel-plugin-istanbul": "^5.1.0",
     "browser-sync": "^2.26.3",
     "chai": "^4.2.0",
     "connect-browser-sync": "^2.1.0",
     "cross-env": "^5.2.0",
-    "jsdom": "^13.0.0",
+    "jsdom": "^15.1.0",
     "jshint": "^2.9.7",
     "mocha": "^5.2.0",
     "mocha-junit-reporter": "^1.18.0",
