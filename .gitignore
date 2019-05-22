@@ -19,3 +19,4 @@ cert/
 .nyc_output/
 coverage/
 test-report/
+/accessibility.csv

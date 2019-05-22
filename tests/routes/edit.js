@@ -41,6 +41,7 @@ const submit_data = {
 
 describe('Edit', function() {
     it('Should provide a form', function(done) {
+        this.timeout(5500);
         request(app).get('/edit')
             .expect('Content-Type', 'text/html')
             .expect(200)
