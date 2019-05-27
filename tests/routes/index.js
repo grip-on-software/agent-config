@@ -4,8 +4,10 @@
 
 const fs = require('fs'),
       request = require('supertest'),
+      moment = require('moment'),
       assert = require('chai').assert,
       app = require('../../lib/app'),
+      { checkUpdateEnvironment, createUpdate } = require('../server'),
       { loadPageWithScripts } = require('../res');
 
 describe('Index', function() {
@@ -46,19 +48,33 @@ describe('Index', function() {
         if (!fs.existsSync('test-export/TEST')) {
             fs.mkdirSync('test-export/TEST');
         }
-        fs.writeFileSync('test-export/TEST/preflight_date.txt', '1970-01-01 00:00:01');
-        request(app).get('/')
-            .then(response => {
-                loadPageWithScripts(app, response, done).then(window => {
-                    const { document } = window;
-                    assert.equal(document.querySelectorAll(".time").length, 1);
-                    done();
+        const dates = [
+            ['invalid', 'time-never'],
+            ['1970-01-01 00:00:01', 'time-old'],
+            [moment().format('YYYY-MM-DD HH:mm:ss'), 'time']
+        ];
+        dates.reduce((promise, dateTest) => {
+            return new Promise((resolve, reject) => {
+                promise.then(() => {
+                    const [date, dateStatus] = dateTest;
+                    fs.writeFileSync('test-export/TEST/preflight_date.txt', date);
+                    request(app).get('/')
+                        .then(response => {
+                            loadPageWithScripts(app, response, done).then(window => {
+                            const { document } = window;
+                            assert.equal(document.querySelectorAll(`.${dateStatus}`).length, 1, `Expecting one element with class ${dateStatus}`);
+                            resolve();
+                        }).catch((err) => {
+                            reject(err);
+                        });
+                    }).catch((err) => {
+                        reject(err);
+                    });
                 }).catch((err) => {
-                    done(err);
+                    reject(err);
                 });
-            }).catch((err) => {
-                done(err);
             });
+        }, Promise.resolve()).then(() => done()).catch((err) => done(err));
     });
 
     it('Should indicate a failed agent status if misconfigured', function(done) {
@@ -102,6 +118,37 @@ describe('Index', function() {
                     done(err);
                 });
             }).catch((err) => {
+                done(err);
+            });
+    });
+
+    it('Should handle an update status message', function(done) {
+        if (!checkUpdateEnvironment(app)) {
+            return this.skip();
+        }
+        const upstreamServer = createUpdate(app, (req, res) => {
+            res.setHeader("Content-Type", "application/json");
+            res.end(JSON.stringify({
+                up_to_date: false,
+                version: "abc"
+            }));
+        });
+        request(app).get('/')
+            .then(response => {
+                loadPageWithScripts(app, response, done).then(window => {
+                    const { document } = window;
+                    window.$(document).ready(() => {
+                        document.querySelector("#version button.update").click();
+                        assert.equal(document.querySelector("#version button.update"), null);
+                        upstreamServer.close();
+                        done();
+                    });
+                }).catch((err) => {
+                    upstreamServer.close();
+                    done(err);
+                });
+            }).catch((err) => {
+                upstreamServer.close();
                 done(err);
             });
     });
