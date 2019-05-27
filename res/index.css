@@ -23,6 +23,6 @@ body {
 .status-ok {
 	color: hsl(141, 71%, 28%);
 }
-.status-fail, .time-never {
+.status-fail, .time-old, .time-never {
 	color: hsl(348, 100%, 41%);
 }
