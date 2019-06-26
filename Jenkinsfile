@@ -26,6 +26,7 @@ pipeline {
         always {
             publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, includes: 'junit/**/*,html/**/*', keepAll: false, reportDir: 'test-report', reportFiles: 'html/htmlReport.html', reportName: 'Test Report', reportTitles: ''])
             publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'coverage', reportFiles: 'lcov-report/index.html', reportName: 'Coverage', reportTitles: ''])
+            publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: false, reportDir: 'owasp-dep/', reportFiles: 'dependency-check-report.html', reportName: 'Dependencies', reportTitles: ''])
             archiveArtifacts artifacts: 'accessibility.csv', excludes: '', onlyIfSuccessful: true
             junit 'test-report/junit/*.xml'
         }
@@ -72,6 +73,17 @@ pipeline {
             steps {
                 sh 'NODE_ENV=development npm install && npm run lint'
                 sh 'LISTEN_ADDR= SSH_HTTPS_PORT=8443 SSH_HTTPS_CERT=cert/server.crt SSH_HOST=localhost AGENT_PORT=7070 AGENT_HOST=localhost UPDATE_TIMEOUT=100 SCRAPE_TIMEOUT=100 npm test'
+            }
+        }
+        stage('Dependency Check') {
+            steps {
+                dir('security-tooling') {
+                    checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'CleanBeforeCheckout']], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/ICTU/security-tooling']]]
+                    sh 'sed -i "s/\\r$//" *.sh'
+                    sh 'cp ../tests/suppression.xml suppression.xml'
+                    sh 'sed -i "s/\\(:\\/tmp\\/src\\)/\\1 -v dependency-check-data:\\/tmp\\/dependency-check\\/data/" ./security_dependencycheck.sh'
+                    sh 'bash ./security_dependencycheck.sh "$WORKSPACE" "$WORKSPACE/owasp-dep" --exclude "**/.git/**"'
+                }
             }
         }
         stage('SonarQube Analysis') {
