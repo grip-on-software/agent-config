@@ -19,4 +19,5 @@ cert/
 .nyc_output/
 coverage/
 test-report/
+owasp-dep/
 /accessibility.csv
