@@ -51,7 +51,8 @@ describe('Index', function() {
         const dates = [
             ['invalid', 'time-never'],
             ['1970-01-01 00:00:01', 'time-old'],
-            [moment().format('YYYY-MM-DD HH:mm:ss'), 'time']
+            [moment().format('YYYY-MM-DD HH:mm:ss'), 'time'],
+            [moment().format('YYYY-MM-DD HH:mm:ssZZ'), 'time']
         ];
         dates.reduce((promise, dateTest) => {
             return new Promise((resolve, reject) => {
