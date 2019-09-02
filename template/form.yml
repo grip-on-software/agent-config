@@ -5,14 +5,14 @@ environment:
         bigboat_url:
             field: string
             label: 'BigBoat URL'
-            hint: 'The URL to the location of the BigBoat dashboard.'
-            placeholder: '{{bigboat_placeholder}}'
+            hint: 'The URL to the location of the BigBoat application dashboard.'
+            placeholder: '{{{bigboat_placeholder}}}'
             option: [settings, 'bigboat', 'host']
         bigboat_key:
             field: string
             label: 'BigBoat key'
             widget: password
-            hint: 'An API key of the BigBoat dashboard.'
+            hint: 'An API key of the BigBoat application dashboard.'
             longer_hint: "You can generate a new key on the dashboard's configuration page. Do not generate the API key while logged out. Any logged-in API key works."
             option: [settings, 'bigboat', 'key']
         jira_key:
@@ -31,12 +31,23 @@ environment:
                     placeholder: 'ABC'
                 value:
                     field: string
-                    label: 'HQ name'
+                    label: 'Quality name'
                     placeholder: 'abc'
             label: 'Quality report name'
-            hint: 'The name of the project used internally by the quality report dashboard.'
+            hint: 'The name of the project used internally by the quality report dashboard or the application dashboard.'
             longer_hint: 'Find the name in <a href="{{quality_report_definition_url}}">the Quality reports definitions</a>; if you have a repository like <samp>quality-report-abc-definition</samp> then this is <kdb>abc</kdb>. Skip this if there is no quality report or if the definition does not contain any source information for the sources we obtain (e.g., version control). To collect multiple projects in the agent, include for each project their JIRA key and quality report name.'
             cloneable: true
+        quality_report_enable:
+            field: boolean
+            widget: checkbox
+            label: 'Use quality report'
+            hint: 'Disable this <strong>only</strong> when the quality report is never used and only a Quality Time instance could be used in the future.'
+        quality_time_url:
+            field: string
+            label: 'Quality Time URL'
+            placeholder: '{{{quality_time_placeholder}}}'
+            hint: 'The URL to the landing page of the Quality Time reports.'
+            option: [settings, 'quality-time', 'url']
 version_control:
     name: Version control system
     icon: 'fas fa-code-branch'
@@ -59,7 +70,7 @@ version_control:
             field: host
             required: true
             label: 'Version control domain'
-            placeholder: '{{version_control_placeholder}}'
+            placeholder: '{{{version_control_placeholder}}}'
             hint: 'The domain name plus optional port number where the version control system is hosted.'
             longer_hint: 'For example <samp>{{version_control_placeholder}}</samp> or <samp>{{version_control_port_sample}}</samp>. Do not add the protocol to this value.'
         version_control_auth:

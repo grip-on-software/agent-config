@@ -16,6 +16,7 @@
     "jira_url": "http://jira.example",
     "quality_report_definition_url": "http://quality-report.example",
     "bigboat_placeholder": "http://bigboat.example",
+    "quality_time_placeholder": "http://www.quality-time.example:5000",
     "version_control_placeholder": "gitlab.example",
     "version_control_port_sample": "tfs.example:8080",
     "jenkins_placeholder": "jenkins.example:8080"
