@@ -185,7 +185,11 @@ describe('Edit', function() {
                 'jenkins_2[jenkins_host]': 'ci.example',
                 'jenkins_2[jenkins_user]': 'newuser',
                 'jenkins_2[jenkins_token]': 'newpass',
-                'jenkins_2[jenkins_unsafe]': ''
+                'jenkins_2[jenkins_unsafe]': '',
+                'jenkins_3[jenkins_host]': '',
+                'jenkins_3[jenkins_user]': '',
+                'jenkins_3[jenkins_token]': '',
+                'jenkins_3[jenkins_unsafe]': '',
             }
         );
         request(app).post('/edit').send(new_data).then(() => {
@@ -203,6 +207,8 @@ describe('Edit', function() {
                     assert.equal(document.querySelector("input#id_jenkins_1\\[jenkins_user\\]").value, "api-user");
                     assert.equal(document.querySelector("input#id_jenkins_2\\[jenkins_host\\]").value, "ci.example");
                     assert.equal(document.querySelector("input#id_jenkins_2\\[jenkins_user\\]").value, "newuser");
+                    // No field is added for extra/empty Jenkins
+                    assert.equal(document.querySelector("input#id_jenkins_3\\[jenkins_host\\]"), null);
                     done();
                 }).catch((err) => {
                     done(err);
