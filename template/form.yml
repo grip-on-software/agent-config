@@ -162,7 +162,6 @@ jenkins:
     fields:
         jenkins_host:
             field: host
-            required: true
             label: 'Jenkins domain'
             placeholder: '{{jenkins_placeholder}}'
             hint: 'The domain name and optionally port number of the Jenkins instance used for automated builds of the application developed by the team.'
