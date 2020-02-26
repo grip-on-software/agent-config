@@ -35,18 +35,18 @@ environment:
                     placeholder: 'abc'
             label: 'Quality report name'
             hint: 'The name of the project used internally by the quality report dashboard or the application dashboard.'
-            longer_hint: 'Find the name in <a href="{{quality_report_definition_url}}">the Quality reports definitions</a>; if you have a repository like <samp>quality-report-abc-definition</samp> then this is <kdb>abc</kdb>. Skip this if there is no quality report or if the definition does not contain any source information for the sources we obtain (e.g., version control). To collect multiple projects in the agent, include for each project their JIRA key and quality report name.'
+            longer_hint: 'Find the name in <a href="{{quality_report_definition_url}}">the Quality reports definitions</a>; if you have a repository like <samp>quality-report-abc-definition</samp> then this is <kdb>abc</kdb>. Another valid option is to set it to the dashboard URL fragment. Skip this if there is no quality report and no Quality Time instance; or if the quality source does not contain any source information for the sources we obtain (e.g., version control). To collect multiple projects in the agent, include for each project their JIRA key and quality report name.'
             cloneable: true
         quality_report_enable:
             field: boolean
             widget: checkbox
             label: 'Use quality report'
-            hint: 'Disable this <strong>only</strong> when the quality report is never used and only a Quality Time instance could be used in the future.'
+            hint: 'Disable this <strong>only</strong> when the quality report is never used and only a Quality Time instance is used.'
         quality_time_url:
             field: string
             label: 'Quality Time URL'
             placeholder: '{{{quality_time_placeholder}}}'
-            hint: 'The URL to the landing page of the Quality Time reports.'
+            hint: 'The URL to the landing page of the Quality Time reports or a specific report URL.'
             option: [settings, 'quality-time', 'url']
 version_control:
     name: Version control system
@@ -61,7 +61,7 @@ version_control:
                 git: 'Git'
                 gitlab: 'GitLab'
                 github: 'GitHub'
-                tfs: 'Team Foundation Server'
+                tfs: 'Azure DevOps (Team Foundation Server)'
                 subversion: 'Subversion'
             widget: select
             hint: 'The type of version control system used.'
@@ -88,15 +88,15 @@ version_control:
             longer_hint: |
                 <ul>
                     <li>Anonymous checkout: generally not an acceptable method.</li>
-                    <li>GitHub API: Use the API to register a specific SSH token for a user.</li>
-                    <li>GitLab API: Use the API to register a specific SSH token for a user. This user needs at least Reporter level access permissions to the group. Generate an API token for this user on GitLab in the user's Settings, under Personal Access tokens. Use a descriptive name "GROS reporter" with no expiry for the "api" scope. Keep the username field in this form empty and provide the API token in the token field after that.</li>
+                    <li>GitHub API: Use the GitHub API to register a specific SSH token for a user.</li>
+                    <li>GitLab API: Use the GitLab API to register a specific SSH token for a user. This user needs at least Reporter level access permissions to the group. Generate an API token for this user on GitLab in the user's Settings, under Personal Access tokens. Use a descriptive name "GROS reporter" with no expiry for the "api" scope. Keep the username field in this form empty and provide the API token in the token field after that.</li>
                     <li>Deploy key: Enter a predefined Git SSH private key. This may be used in combination with a user, although you may have to supply a generic user for authentication. Userless global deploy keys are supported on GitLab, but Administrator access is required to register the deploy key pair. In general, on Linux/Mac, use <kbd>ssh-keygen -t rsa -C "GROS reporter" -b 4096 -f deploy_key</kbd> and press <kbd>Enter</kbd> twice to skip entering a passphrase (not supported at this moment). Insert the public part (found in <samp>deploy_key.pub</samp>) on GitLab in the Admin Area under Deploy Keys with a descriptive name <kbd>"GROS reporter"</kbd>, and without write access. This can also be used for pre-generated SSH key pairs in (other) version control system. Set the username field to the SSH user (such as <kbd>git</kbd>) or keep it empty, just like the token field, and provide the contents of the private key (<samp>deploy_key</samp>) in the key field after that.</li>
-                    <li>Username and password: Combination as used by TFS or Subversion. Provide the username and password in the next two fields.</li>
+                    <li>Username and password: Provide the username and password in the next two fields.</li>
                 </ul>
         version_control_user:
             field: string
             label: 'Version control username'
-            hint: 'The username to login to the version control system with. Only used if the authentication is "Username and password".'
+            hint: 'The username to login to the version control system with. If GitHub/GitLab is used, you probably want to set this to the SSH user, <kbd>git</kbd>.'
         version_control_token:
             field: string
             label: 'Version control authentication token'
@@ -106,7 +106,7 @@ version_control:
             field: string
             label: 'Version control SSH deploy key'
             widget: textarea
-            hint: 'The custom private SSH part of a deploy key pair to login to the version control system with.'
+            hint: 'The custom private SSH part of a deploy key pair to login to the version control system with. Do not fill in the API token.'
             expand: true
         version_control_group:
             field: string
@@ -147,13 +147,13 @@ version_control:
             field: string
             label: 'Version control start date'
             hint: 'Date from which to start collecting revisions.'
-            longer_hint: 'This allows for ignoring all commits authored before th given date in all repositories on this host, useful for migration schemes. The <samp>Version control tag</samp> option overrides this behavior. Only for Git repositories.'
+            longer_hint: 'This allows for ignoring all commits authored before the given date in all repositories on this host, useful for migrations. The <samp>Version control tag</samp> option overrides this behavior. Only for Git repositories.'
             expand: true
         version_control_tag:
             field: string
             label: 'Version control tag'
             hint: 'Tag from which to start collecting revisions.'
-            longer_hint: 'If the tag is found in a repository, then only the commiots leading to this that are collected. This can be useful for migration schemes. Only for Git repositories.'
+            longer_hint: 'If the tag is found in a repository, then only the commits leading to this that are collected. This can be useful for migration schemes. Only for Git repositories.'
             expand: true
 jenkins:
     name: Jenkins
@@ -174,8 +174,8 @@ jenkins:
             field: string
             label: 'Jenkins token'
             widget: password
-            hint: 'The password to log in to the Jenkins API with. This is only necessary if Jenkins is completely restricted to logged-in users.'
-            longer_hint: 'Use an API token instead of the plain (LDAP) password. You can find the API token when you are logged in by clicking on your name in the top right, then Configure, and finally press <kbd><samp>Show API Token...</samp></kbd>'
+            hint: 'The password or token to log in to the Jenkins API with. This is only necessary if Jenkins is completely restricted to logged-in users.'
+            longer_hint: 'Use an API token instead of a plain password. You can find the API token when you are logged in by clicking on your name in the top right, then Configure, and finally press <kbd><samp>Show API Token...</samp></kbd>'
         jenkins_unsafe:
             field: boolean
             widget: checkbox
