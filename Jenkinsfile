@@ -66,7 +66,7 @@ pipeline {
         stage('Test') {
             agent {
                 docker {
-                    image '$IMAGE:$IMAGE_TAG'
+                    image "${env.IMAGE}:${env.IMAGE_TAG}"
                     reuseNode true
                 }
             }
