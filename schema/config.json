@@ -1,0 +1,114 @@
+{
+    "$id": "https://gros.liacs.nl/schema/agent-config/config.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "Agent configuration UI configuration",
+    "$ref": "#/$defs/config",
+    "$defs": {
+        "config": {
+            "type": "object",
+            "description": "Configuration for the configurator.",
+            "$comment": "More documentation on configuration items in README.md of the gros/agent-config repository",
+            "properties": {
+                "listen_address": {
+                    "type": "string",
+                    "oneOf": [
+                        {"format": "ipv4"},
+                        {"format": "ipv6"}
+                    ],
+                    "description": "Bind IP address to listen to."
+                },
+                "listen_port": {
+                    "$ref": "#/$defs/port",
+                    "description": "Port to listen to."
+                },
+                "listen_host": {
+                    "type": "string",
+                    "format": "hostname",
+                    "description": "Hostname of the web UI that users must use to connect to."
+                },
+                "ssh_host": {
+                    "type": "string",
+                    "format": "hostname",
+                    "description": "Hostname of controller API."
+                },
+                "ssh_https_port": {
+                    "$ref": "#/$defs/port",
+                    "description": "Port of controller API for version update checks."
+                },
+                "ssh_https_cert": {
+                    "type": "string",
+                    "description": "Filename of certificate of controller API."
+                },
+                "update_timeout": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "description": "Milliseconds to wait for update check."
+                },
+                "agent_host": {
+                    "type": "string",
+                    "format": "hostname",
+                    "description": "Hostname of agent related to configuration UI."
+                },
+                "agent_port": {
+                    "$ref": "#/$defs/port",
+                    "description": "Port of agent with scraper API."
+                },
+                "scrape_timeout": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "description": "Milliseconds to wait for scraper API."
+                },
+                "export_path": {
+                    "type": "string",
+                    "description": "Path to dropins and exported data of the agent."
+                },
+                "config_path": {
+                    "type": "string",
+                    "description": "Path to agent settings and credentials."
+                },
+                "key_path": {
+                    "type": "string",
+                    "description": "Path to SSH key storage."
+                },
+                "visualization_url": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "URL of visualizations of collected data."
+                },
+                "jira_url": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "URL of JIRA instance."
+                },
+                "quality_report_definition_url": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "URL to project definition repositories for Quality report."
+                },
+                "bigboat_placeholder": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "Example base URL for BigBoat."
+                },
+                "version_control_placeholder": {
+                    "type": "string",
+                    "format": "hostname",
+                    "description": "Example domain name of a version control system."
+                },
+                "version_control_port_sample": {
+                    "type": "string",
+                    "description": "Example domain name and port number of a version control system."
+                },
+                "jenkins_placeholder": {
+                    "type": "string",
+                    "description": "Example domain name (and optional port number) of Jenkins CI."
+                }
+            }
+        },
+        "port": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 65535
+        }
+    }
+}

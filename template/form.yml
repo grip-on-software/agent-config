@@ -55,7 +55,7 @@ version_control:
     fields:
         version_control_type:
             field: string
-            required: true,
+            required: true
             label: 'Version control type'
             choices:
                 git: 'Git'

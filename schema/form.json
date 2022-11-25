@@ -1,0 +1,122 @@
+{
+    "$id": "https://gros.liacs.nl/schema/agent-config/form.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "Agent configuration form specification",
+    "$ref": "#/$defs/form",
+    "$defs": {
+        "form": {
+            "type": "object",
+            "patternProperties": {
+                ".+": {
+                    "type": "object",
+                    "description": "Group within the form.",
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "description": "Name of the form group."
+                        },
+                        "icon": {
+                            "type": "string",
+                            "description": "FontAwesome class names of an icon."
+                        },
+                        "cloneable": {
+                            "type": "boolean",
+                            "default": false,
+                            "description": "Whether it is possible to fill in a list of values for all the fields in the group by duplicating the group."
+                        },
+                        "fields": {
+                            "type": "object",
+                            "patternProperties": {
+                                ".+": {
+                                    "$ref": "#/$defs/field",
+                                    "description": "Field within the form."
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "field": {
+            "type": "object",
+            "properties": {
+                "field": {
+                    "type": "string",
+                    "enum": [
+                        "number", "boolean", "array", "password", "email",
+                        "tel", "url", "date", "plain_string", "string", "host",
+                        "map"
+                    ],
+                    "description": "Type of the field."
+                },
+                "fields": {
+                    "type": "object",
+                    "description": "Fields within the field.",
+                    "patternProperties": {
+                        ".+": {
+                            "$ref": "#/$defs/field"
+                        }
+                    }
+                },
+                "required": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Whether it is required to fill in a value for the field."
+                },
+                "label": {
+                    "type": "string",
+                    "description": "Label of the field."
+                },
+                "choices": {
+                    "type": "object",
+                    "description": "A mapping of choice values (to store) and displayed values that the field can have.",
+                    "patternProperties": {
+                        ".*": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "widget": {
+                    "type": "string",
+                    "enum": [
+                        "text", "email", "number", "hidden", "color", "tel",
+                        "date", "checkbox", "select", "multipleCheckbox",
+                        "multipleRadio", "multipleSelect", "label",
+                        "safe_password", "password", "plain_textarea",
+                        "textarea"
+                    ],
+                    "description": "Widget to use for the field."
+                },
+                "hint": {
+                    "type": "string",
+                    "description": "Information to display alongside the field as a hint to what to input."
+                },
+                "longer_hint": {
+                    "type": "string",
+                    "description": "Information to display as a popup as a hint to what to input."
+                },
+                "placeholder": {
+                    "type": "string",
+                    "description": "Mustache template for a placeholder value of the field."
+                },
+                "option": {
+                    "type": "array",
+                    "minItems": 3,
+                    "maxItems": 3,
+                    "items": {"type": "string"},
+                    "description": "Location to store the value of the field in: Configuration file, section and key."
+                },
+                "expand": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Whether the field should be hidden by default, only shown when an option to expand the form group is pressed."
+                },
+                "cloneable": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Whether it is possible to fill in a list of values for the field by duplicating the field."
+                }
+            }
+        }
+    }
+}
