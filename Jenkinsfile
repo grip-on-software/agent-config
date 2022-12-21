@@ -4,6 +4,7 @@ pipeline {
     environment {
         IMAGE = "${env.DOCKER_REGISTRY}/gros-agent-config"
         IMAGE_TAG = env.BRANCH_NAME.replaceFirst('^master$', 'latest')
+        GITLAB_TOKEN = credentials('agent-config-gitlab-token')
         SCANNER_HOME = tool name: 'SonarQube Scanner 3', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
     }
 
@@ -12,7 +13,7 @@ pipeline {
         buildDiscarder(logRotator(numToKeepStr: '10'))
     }
     triggers {
-        gitlab(triggerOnPush: true, triggerOnMergeRequest: true, branchFilterType: 'All')
+        gitlab(triggerOnPush: true, triggerOnMergeRequest: true, branchFilterType: 'All', secretToken: env.GITLAB_TOKEN)
         cron('H H * * H/3')
     }
 
