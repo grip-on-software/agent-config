@@ -73,7 +73,7 @@ pipeline {
             }
             steps {
                 sh 'NODE_ENV=development npm install --cache .npm && npm run lint'
-                sh 'LISTEN_ADDR= SSH_HTTPS_PORT=8443 SSH_HTTPS_CERT=cert/server.crt SSH_HOST=localhost AGENT_PORT=7070 AGENT_HOST=localhost UPDATE_TIMEOUT=100 SCRAPE_TIMEOUT=100 npm test'
+                sh 'SPAWN_WRAP_SHIM_ROOT=. LISTEN_ADDR= SSH_HTTPS_PORT=8443 SSH_HTTPS_CERT=cert/server.crt SSH_HOST=localhost AGENT_PORT=7070 AGENT_HOST=localhost UPDATE_TIMEOUT=100 SCRAPE_TIMEOUT=100 npm test'
             }
         }
         stage('Dependency Check') {
