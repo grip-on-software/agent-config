@@ -5,8 +5,10 @@ node_modules
 # Repository configuration
 .dockerignore
 .gitignore
+.git/
 # Build files
 Jenkinsfile
+.npm/
 # Generated files
 id_rsa.pub
 id_rsa
@@ -24,6 +26,7 @@ settings.cfg
 coverage/
 test-report/
 owasp-dep/
+security*/
 /accessibility.csv
 # Non-production files
 tests/

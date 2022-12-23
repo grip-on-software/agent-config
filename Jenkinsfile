@@ -83,7 +83,7 @@ pipeline {
                     sh 'sed -i "s/\\r$//" *.sh'
                     sh 'cp ../tests/suppression.xml suppression.xml'
                     sh 'mkdir -p -m 0777 "$HOME/OWASP-Dependency-Check/data/cache"'
-                    sh 'mkdir -p -m 0777 $WORKSPACE/owasp-dep"'
+                    sh 'mkdir -p -m 0777 "$WORKSPACE/owasp-dep"'
                     sh 'sed -i "s/\\(--out \\/report\\)/--exclude \\"**\\/.git\\/**\\" --exclude \\"**\\/.npm\\/**\\" --exclude \\"**\\/.nyc_output\\/**\\" --exclude \\"**\\/coverage\\/**\\" --exclude \\"**\\/test-*\\/**\\" --project \\"Agent config\\" \\1/" security_dependencycheck.sh'
                     sh 'bash ./security_dependencycheck.sh "$WORKSPACE" "$WORKSPACE/owasp-dep"'
                 }

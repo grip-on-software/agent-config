@@ -2,6 +2,8 @@
 node_modules
 # Environment configuration
 /config*.json
+# Build files
+.npm/
 # Generated files
 id_rsa.pub
 id_rsa
@@ -21,4 +23,5 @@ cert/
 coverage/
 test-report/
 owasp-dep/
+security*/
 /accessibility.csv
