@@ -23,5 +23,7 @@ settings.cfg
 .nyc_output/
 coverage/
 test-report/
+owasp-dep/
+/accessibility.csv
 # Non-production files
 tests/
