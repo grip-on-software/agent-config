@@ -50,7 +50,7 @@ pipeline {
                 withCredentials([file(credentialsId: 'agent-web-config', variable: 'AGENT_CONFIGURATION'), file(credentialsId: 'upload-server-certificate', variable: 'SERVER_CERTIFICATE')]) {
                     sh 'cp $AGENT_CONFIGURATION config.json'
                     sh 'cp $SERVER_CERTIFICATE wwwgros.crt'
-                    sh 'docker build -t $IMAGE:$IMAGE_TAG . --build-arg NODE_ENV=production'
+                    sh 'docker build -t $DOCKER_REPOSITORY/$IMAGE:$IMAGE_TAG . --build-arg NODE_ENV=production'
                     sh 'docker push $DOCKER_REPOSITORY/$IMAGE:$IMAGE_TAG'
                 }
             }
@@ -102,7 +102,7 @@ pipeline {
             when { branch 'master' }
             steps {
                 sh 'grep ".version.:" package.json | sed -E "s/^.*.version.: .([0-9.]+).,/\\1/" > .version'
-                sh 'docker tag $IMAGE:latest $IMAGE:$(cat .version)'
+                sh 'docker tag -t $DOCKER_REPOSITORY/$IMAGE:latest $DOCKER_REPOSITORY/$IMAGE:$(cat .version)'
                 sh 'docker push $DOCKER_REPOSITORY/$IMAGE:$(cat .version)'
             }
         }
