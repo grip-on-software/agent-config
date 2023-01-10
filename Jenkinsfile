@@ -2,7 +2,7 @@ pipeline {
     agent { label 'axe' }
 
     environment {
-        IMAGE = "${env.DOCKER_REGISTRY}/gros-agent-config"
+        IMAGE = "gros-agent-config"
         IMAGE_TAG = env.BRANCH_NAME.replaceFirst('^master$', 'latest')
         GITLAB_TOKEN = credentials('agent-config-gitlab-token')
         SCANNER_HOME = tool name: 'SonarQube Scanner 3', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
@@ -51,7 +51,7 @@ pipeline {
                     sh 'cp $AGENT_CONFIGURATION config.json'
                     sh 'cp $SERVER_CERTIFICATE wwwgros.crt'
                     sh 'docker build -t $IMAGE:$IMAGE_TAG . --build-arg NODE_ENV=production'
-                    sh 'docker push $IMAGE:$IMAGE_TAG'
+                    sh 'docker push $DOCKER_REPOSITORY/$IMAGE:$IMAGE_TAG'
                 }
             }
         }
@@ -68,6 +68,8 @@ pipeline {
             agent {
                 docker {
                     image "${env.IMAGE}:${env.IMAGE_TAG}"
+                    registryUrl "${env.DOCKER_URL}"
+                    registryCredentialsId 'docker-credentials'
                     reuseNode true
                 }
             }
@@ -101,7 +103,7 @@ pipeline {
             steps {
                 sh 'grep ".version.:" package.json | sed -E "s/^.*.version.: .([0-9.]+).,/\\1/" > .version'
                 sh 'docker tag $IMAGE:latest $IMAGE:$(cat .version)'
-                sh 'docker push $IMAGE:$(cat .version)'
+                sh 'docker push $DOCKER_REPOSITORY/$IMAGE:$(cat .version)'
             }
         }
         stage('Status') {
