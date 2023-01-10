@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'docker' }
+    agent { label 'docker && axe' }
 
     environment {
         IMAGE = "${env.DOCKER_REGISTRY}/gros-agent-config"
