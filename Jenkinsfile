@@ -102,7 +102,7 @@ pipeline {
             when { branch 'master' }
             steps {
                 sh 'grep ".version.:" package.json | sed -E "s/^.*.version.: .([0-9.]+).,/\\1/" > .version'
-                sh 'docker tag -t $DOCKER_REPOSITORY/$IMAGE:latest $DOCKER_REPOSITORY/$IMAGE:$(cat .version)'
+                sh 'docker tag $DOCKER_REPOSITORY/$IMAGE:latest $DOCKER_REPOSITORY/$IMAGE:$(cat .version)'
                 sh 'docker push $DOCKER_REPOSITORY/$IMAGE:$(cat .version)'
             }
         }
