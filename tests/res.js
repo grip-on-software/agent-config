@@ -19,7 +19,7 @@
 'use strict';
 
 const URL = require('url').URL,
-      babel = require('babel-core'),
+      babel = require('@babel/core'),
       babelPluginIstanbul = require('babel-plugin-istanbul').default,
       jsdom = require('jsdom'),
       { JSDOM } = jsdom,
