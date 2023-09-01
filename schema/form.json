@@ -39,6 +39,7 @@
         },
         "field": {
             "type": "object",
+            "title": "Agent configuration form field",
             "properties": {
                 "field": {
                     "type": "string",

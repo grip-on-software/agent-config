@@ -2,19 +2,15 @@
     "$id": "https://gros.liacs.nl/schema/agent-config/config.json",
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "title": "Agent configuration UI configuration",
-    "$ref": "#/$defs/config",
+    "$ref": "#/$defs/config-agent-config",
     "$defs": {
-        "config": {
+        "config-agent-config": {
             "type": "object",
             "description": "Configuration for the configurator.",
             "$comment": "More documentation on configuration items in README.md of the gros/agent-config repository",
             "properties": {
                 "listen_address": {
-                    "type": "string",
-                    "oneOf": [
-                        {"format": "ipv4"},
-                        {"format": "ipv6"}
-                    ],
+                    "$ref": "#/$defs/ip_address",
                     "description": "Bind IP address to listen to."
                 },
                 "listen_port": {
@@ -104,6 +100,13 @@
                     "description": "Example domain name (and optional port number) of Jenkins CI."
                 }
             }
+        },
+        "ip_address": {
+            "type": "string",
+            "oneOf": [
+                {"format": "ipv4"},
+                {"format": "ipv6"}
+            ]
         },
         "port": {
             "type": "integer",
