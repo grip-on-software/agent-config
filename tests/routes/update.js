@@ -20,7 +20,8 @@
 /* jshint mocha: true */
 'use strict';
 
-const request = require('supertest'),
+const dns = require('dns'),
+      request = require('supertest'),
       app = require('../../lib/app'),
       { checkUpdateEnvironment, createUpdate } = require('../server');
 
@@ -73,16 +74,22 @@ describe('Update', function() {
             });
     });
 
-    it('Should provide an error if the upstream is unavailable', function() {
+    it('Should provide an error if the upstream is unavailable', function(done) {
         if (!checkUpdateEnvironment(app)) {
             return this.skip();
         }
-        return request(app).get('/update')
-            .expect("Content-Type", "application/json")
-            .expect(500, {
-                up_to_date: false,
-                message: `connect ECONNREFUSED 127.0.0.1:${app.options.ssh_https_port}`
-            });
+        dns.lookup('localhost', (err, address, family) => {
+            request(app).get('/update')
+                .expect("Content-Type", "application/json")
+                .expect(500, {
+                    up_to_date: false,
+                    message: `connect ECONNREFUSED ${address}:${app.options.ssh_https_port}`
+                })
+                .end((err, res) => {
+                    if (err) { done(err); }
+                    else { done(); }
+                });
+        });
     });
 
     it('Should provide a message if the upstream has a status', function(done) {

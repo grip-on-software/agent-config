@@ -20,7 +20,8 @@
 /* jshint mocha: true */
 'use strict';
 
-const request = require('supertest'),
+const dns = require('dns'),
+      request = require('supertest'),
       app = require('../../lib/app'),
       { createAgent, checkAgentEnvironment } = require('../server');
 
@@ -58,18 +59,24 @@ describe('Scrape', function() {
             });
     });
 
-    it('Should provide an error if the agent is unavailable', function() {
+    it('Should provide an error if the agent is unavailable', function(done) {
         if (!checkAgentEnvironment(app)) {
-            return;
+            return this.skip();
         }
-        return request(app).post('/scrape')
-            .expect("Content-Type", "application/json")
-            .expect(500, {
-                ok: false,
-                error: {
-                    message: `connect ECONNREFUSED 127.0.0.1:${app.options.agent_port}`
-                }
-            });
+        dns.lookup('localhost', (err, address, family) => {
+            request(app).post('/scrape')
+                .expect("Content-Type", "application/json")
+                .expect(500, {
+                    ok: false,
+                    error: {
+                        message: `connect ECONNREFUSED ${address}:${app.options.agent_port}`
+                    }
+                })
+                .end((err, res) => {
+                    if (err) { done(err); }
+                    else { done(); }
+                });
+        });
     });
 
     it('Should provide a message if the agent has a status', function(done) {

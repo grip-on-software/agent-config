@@ -1,18 +1,23 @@
 # Web-based data gathering agent configuration
 
 Web service to provide access to status information, configuration and 
-verification of a data gathering agent.
+verification of a data gathering agent used in the Grip on Software (GROS) 
+research project.
 
 ## Requirements
 
-- NodeJS 6+
-- npm 3+
-- GROS data-gathering agent
+The agent configurator is tested with NodeJS 16+ and npm 8+.
 
-In addition, install the dependencies of this package using `npm install .` 
-This also installs the front-end dependencies. If you do not plan to use the 
-development modes, for example because you are installing this in production, 
-then you can run `npm install --production .` instead.
+A GROS [data-gathering](https://github.com/grip-on-software/data-gathering) 
+agent should be deployed in concert with the configurator in order to make use 
+of the configuration; see the [Building](#building) for an example Docker 
+Compose setup. The agent also communicates with the controller server daemon 
+that is available in that repository.
+
+For a standalone usage, install the dependencies of this package by running 
+`npm install .` This also installs the front-end dependencies. If you do not 
+plan to use the development modes, for example because you are installing this 
+in production, then you can run `npm install --production .` instead.
 
 ## Configuration
 
@@ -79,7 +84,7 @@ form editor:
 A Jenkins Pipeline-based build definition is provided to generate and tag 
 a versioned Docker image. This allows one to bundle the image with a GROS data 
 gathering agent image, using a `docker-compose.yml` file to start them with 
-shared volumes. An example Compose file is shown below.
+shared volumes. An example Docker Compose file is shown below.
 
 ```compose
 agent:
@@ -125,3 +130,10 @@ LISTEN_ADDR= SSH_HTTPS_PORT=8443 SSH_HTTPS_CERT=cert/server.crt \
 SSH_HOST=localhost AGENT_PORT=7070 AGENT_HOST=localhost UPDATE_TIMEOUT=100 \
 SCRAPE_TIMEOUT=100 LISTEN_HOST= npm test
 ```
+
+[GitHub Actions](https://github.com/grip-on-software/agent-config/actions) is 
+used to run the unit tests and report on coverage on commits and pull requests. 
+This includes quality gate scans tracked by 
+[SonarCloud](https://sonarcloud.io/project/overview?id=grip-on-software_agent-config) 
+and [Coveralls](https://coveralls.io/github/grip-on-software/agent-config) for 
+coverage history.
