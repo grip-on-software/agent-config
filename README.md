@@ -1,5 +1,14 @@
 # Web-based data gathering agent configuration
 
+[![npm](https://img.shields.io/npm/v/@gros/agent-config.svg)](https://www.npmjs.com/package/@gros/agent-config)
+[![Build 
+status](https://github.com/grip-on-software/agent-config/actions/workflows/agent-config.yml/badge.svg)](https://github.com/grip-on-software/agent-config/actions/workflows/agent-config-tests.yml)
+[![Coverage 
+Status](https://coveralls.io/repos/github/grip-on-software/agent-config/badge.svg?branch=master)](https://coveralls.io/github/grip-on-software/agent-config?branch=master)
+[![Quality Gate 
+Status](https://sonarcloud.io/api/project_badges/measure?project=grip-on-software_agent-config&metric=alert_status)](https://sonarcloud.io/project/overview?id=grip-on-software_agent-config)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.11115708.svg)](https://doi.org/10.5281/zenodo.11115708)
+
 Web service to provide access to status information, configuration and 
 verification of a data gathering agent used in the Grip on Software (GROS) 
 research project.
