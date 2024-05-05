@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+title: >-
+  Web interface for status and configuration of the data gathering agent
+message: Please cite this software as follows.
+type: software
+authors:
+  - given-names: Leon
+    family-names: Helwerda
+    email: l.s.helwerda@liacs.leidenuniv.nl
+    affiliation: Leiden University
+    orcid: 'https://orcid.org/0000-0002-4299-466X'
+repository-code: 'https://github.com/grip-on-software/agent-config'
+repository-artifact: 'https://www.npmjs.com/package/@gros/agent-config'
+url: 'https://gros.liacs.nl/'
+keywords:
+  - agent-based
+  - configurator
+license: Apache-2.0
+version: 0.0.3

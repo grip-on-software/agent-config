@@ -2,22 +2,26 @@
   "name": "@gros/agent-config",
   "version": "0.0.3",
   "description": "Web interface for status and configuration of the data gathering agent.",
+  "keywords": [
+    "agent-based",
+    "configurator"
+  ],
   "license": "Apache-2.0",
   "author": "Leon Helwerda <l.s.helwerda@liacs.leidenuniv.nl>",
   "files": [
-      "lib/**/.js",
-      "lib/config.json",
-      "res/*.css",
-      "res/*.ico",
-      "res/*.js",
-      "res/*.png",
-      "template/*.mustache",
-      "template/*.yml"
+    "lib/**/.js",
+    "lib/config.json",
+    "res/*.css",
+    "res/*.ico",
+    "res/*.js",
+    "res/*.png",
+    "template/*.mustache",
+    "template/*.yml"
   ],
   "directories": {
-      "lib": "lib",
-      "res": "res",
-      "test": "tests"
+    "lib": "lib",
+    "res": "res",
+    "test": "tests"
   },
   "repository": {
     "type": "git",
@@ -36,40 +40,40 @@
     "test": "rm -rf test-config test-export test-ssh && mkdir -p test-report/junit test-report/html test-config test-export test-ssh && echo 'test-dev' > test-config/VERSION && cross-env NODE_ENV=development CONFIG_PATH=test-config EXPORT_PATH=test-export IDENTITY_PATH=test-ssh nyc --reporter=lcov --reporter=text mocha --timeout 5000 --reporter=mocha-multi-reporters --reporter-options configFile=test-config.json tests/*.js tests/**/*.js"
   },
   "devDependencies": {
-    "@babel/core": "^7.21.8",
+    "@babel/core": "^7.24.5",
     "@ictu/axe-reports": "^1.1.11",
-    "axe-core": "^4.7.1",
+    "axe-core": "^4.9.0",
     "babel-plugin-istanbul": "^6.1.1",
-    "browser-sync": "^2.29.1",
-    "chai": "^4.3.7",
+    "browser-sync": "^3.0.2",
+    "chai": "^4.4.1",
     "connect-browser-sync": "^2.1.0",
     "cross-env": "^7.0.3",
-    "jsdom": "^22.0.0",
+    "jsdom": "^24.0.0",
     "jshint": "^2.13.6",
-    "mocha": "^10.2.0",
-    "mocha-junit-reporter": "^2.2.0",
+    "mocha": "^10.4.0",
+    "mocha-junit-reporter": "^2.2.1",
     "mocha-multi-reporters": "^1.5.1",
     "mocha-simple-html-reporter": "^2.0.0",
-    "mocha-sonar-generic-test-coverage": "0.0.6",
-    "nodemon": "^2.0.22",
+    "mocha-sonar-generic-test-coverage": "^0.0.6",
+    "nodemon": "^3.1.0",
     "nyc": "^15.1.0",
-    "open": "^9.1.0",
-    "supertest": "^6.3.3"
+    "open": "^10.1.0",
+    "supertest": "^7.0.0"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^6.4.0",
-    "async": "^3.2.4",
+    "@fortawesome/fontawesome-free": "^6.5.2",
+    "async": "^3.2.5",
     "configparser": "^0.3.10",
-    "express": "^4.18.2",
-    "formidable": "^2.1.1",
+    "express": "^4.19.2",
+    "formidable": "^3.5.1",
     "forms": "^1.3.2",
     "host-validation": "^2.0.1",
-    "jquery": "^3.7.0",
+    "jquery": "^3.7.1",
     "js-yaml": "^4.1.0",
     "lodash": "^4.17.21",
-    "moment": "^2.29.4",
+    "moment": "^2.30.1",
     "mustache": "^4.2.0",
-    "qs": "^6.11.2",
+    "qs": "^6.12.1",
     "serve-index": "^1.9.1"
   }
 }
