@@ -2,7 +2,7 @@
 
 [![npm](https://img.shields.io/npm/v/@gros/agent-config.svg)](https://www.npmjs.com/package/@gros/agent-config)
 [![Build 
-status](https://github.com/grip-on-software/agent-config/actions/workflows/agent-config.yml/badge.svg)](https://github.com/grip-on-software/agent-config/actions/workflows/agent-config-tests.yml)
+status](https://github.com/grip-on-software/agent-config/actions/workflows/agent-config-tests.yml/badge.svg)](https://github.com/grip-on-software/agent-config/actions/workflows/agent-config-tests.yml)
 [![Coverage 
 Status](https://coveralls.io/repos/github/grip-on-software/agent-config/badge.svg?branch=master)](https://coveralls.io/github/grip-on-software/agent-config?branch=master)
 [![Quality Gate 
