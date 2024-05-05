@@ -1,0 +1,40 @@
+name: grip-on-software/agent-config
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    types: [opened, synchronize, reopened]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4.1.4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4.0.2
+        with:
+          cache: npm
+      - run: npm install
+      - name: Create test server certificate
+        run: |
+          mkdir cert
+          openssl genrsa -out cert/server.key 2048
+          openssl rsa -in cert/server.key -out cert/server.crt.key
+          openssl req -sha256 -new -key cert/server.crt.key -out cert/server.csr -subj /CN=localhost
+          openssl x509 -req -sha256 -days 365 -in cert/server.csr -signkey cert/server.crt.key -out cert/server.crt
+      - run: LISTEN_ADDR= SSH_HTTPS_PORT=8443 SSH_HTTPS_CERT=cert/server.crt SSH_HOST=localhost AGENT_PORT=7070 AGENT_HOST=localhost UPDATE_TIMEOUT=100 SCRAPE_TIMEOUT=100 npm test
+      - name: SonarCloud Scan
+        uses: sonarsource/sonarcloud-github-action@v2.1.1
+        env:
+          SONAR_TOKEN: "${{ secrets.SONAR_TOKEN }}"
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+      - name: Coveralls
+        uses: coverallsapp/github-action@v2
+        if: "${{ success() }}"
+    strategy:
+      matrix:
+        node_js:
+          - '20'
+          - '22'
