@@ -67,10 +67,10 @@ $(document).ready(function() {
     $(".component").each(function() {
         const component = $(this);
         if (component.find(".expand").css("display", "none").length) {
-            var toggle = $("<div></div>").attr("class", "toggle-expand")
+            const toggle = $("<div></div>").attr("class", "toggle-expand")
                 .append($("<i></i>").attr("class", "fas fa-angle-double-down"));
             toggle.on("click", function() {
-                var expand = $(this).attr("class") === "toggle-expand";
+                const expand = $(this).attr("class") === "toggle-expand";
                 $(this).parents(".component").find(".expand")
                     .css("display", expand ? "block" : "none");
                 $(this).attr("class", "toggle-" + (expand ? "collapse" : "expand"))
