@@ -1,6 +1,6 @@
 $(document).ready(function() {
     $('#options button.scrape').on('click', function() {
-        var spinner = $('<i></i>').attr('class', 'fas fa-spinner fa-spin');
+        const spinner = $('<i></i>').attr('class', 'fas fa-spinner fa-spin');
         $(this).replaceWith(spinner);
         $.ajax('/scrape', {
             dataType: 'json',
@@ -12,13 +12,13 @@ $(document).ready(function() {
                 .text(data.error ? data.error.message : 'Scrape job started.')
             );
         }).fail(function(jqXHR, textStatus, errorThrown) {
-            var statusMessage = String(errorThrown);
+            let statusMessage = String(errorThrown);
             if (jqXHR.responseText !== '' &&
                 jqXHR.getResponseHeader('Content-Type') === 'application/json'
             ) {
-                var response = JSON.parse(jqXHR.responseText);
-                if (response.error && response.error.message) {
-                    statusMessage = response.error.message;
+                const response = JSON.parse(jqXHR.responseText);
+                if (response.error) {
+                    statusMessage += ': ' + response.error.message;
                 }
             }
             $(this).replaceWith($('<span></span>')

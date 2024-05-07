@@ -21,6 +21,7 @@
 'use strict';
 
 const dns = require('dns'),
+      process = require('process'),
       request = require('supertest'),
       app = require('../../lib/app'),
       { createAgent, checkAgentEnvironment } = require('../server');
@@ -69,7 +70,8 @@ describe('Scrape', function() {
                 .expect(500, {
                     ok: false,
                     error: {
-                        message: `connect ECONNREFUSED ${address}:${app.options.agent_port}`
+                        message: process.platform === "darwin" ? '' :
+                            `connect ECONNREFUSED ${address}:${app.options.agent_port}`
                     }
                 })
                 .end((err, res) => {

@@ -15,7 +15,7 @@ research project.
 
 ## Requirements
 
-The agent configurator is tested with NodeJS 16+ and npm 8+.
+The agent configurator is tested with NodeJS 20+ and npm 10+.
 
 A GROS [data-gathering](https://github.com/grip-on-software/data-gathering) 
 agent should be deployed in concert with the configurator in order to make use 

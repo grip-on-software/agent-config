@@ -64,7 +64,15 @@ describe('Application', function() {
 
     it('Should use host validation', function(done) {
         request(app).get('/')
-            .set('Host', 'www.dns-rebind.test:123')
-            .expect(403, done);
+            .set('Host', 'www.agent-config.test')
+            .expect(200)
+            .then(() => {
+                request(app).get('/')
+                    .set('Host', 'www.dns-rebind.test:123')
+                    .expect(403, done);
+            })
+            .catch((err) => {
+                done(err);
+            });
     });
 });

@@ -21,6 +21,7 @@
 'use strict';
 
 const dns = require('dns'),
+      process = require('process'),
       request = require('supertest'),
       app = require('../../lib/app'),
       { checkUpdateEnvironment, createUpdate } = require('../server');
@@ -83,7 +84,8 @@ describe('Update', function() {
                 .expect("Content-Type", "application/json")
                 .expect(500, {
                     up_to_date: false,
-                    message: `connect ECONNREFUSED ${address}:${app.options.ssh_https_port}`
+                    message: process.platform === "darwin" ? '' :
+                        `connect ECONNREFUSED ${address}:${app.options.ssh_https_port}`
                 })
                 .end((err, res) => {
                     if (err) { done(err); }

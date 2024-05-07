@@ -1,12 +1,12 @@
 $(document).ready(function() {
     $('#version button.update').on('click', function() {
-        var spinner = $('<i></i>').attr('class', 'fas fa-spinner fa-spin');
+        const spinner = $('<i></i>').attr('class', 'fas fa-spinner fa-spin');
         $(this).replaceWith(spinner);
         $.ajax('/update', {
             dataType: 'json',
             context: spinner
         }).done(function(data) {
-            var message = data.message;
+            let message = data.message;
             if (!message) {
                 message = (data.up_to_date ? 'Up to date' :
                     'Latest version: ' + data.version
@@ -17,7 +17,7 @@ $(document).ready(function() {
                 .text(message)
             );
         }).fail(function(jqXHR, textStatus, errorThrown) {
-            var statusMessage = String(errorThrown);
+            let statusMessage = String(errorThrown);
             if (jqXHR.responseText !== '' &&
                 jqXHR.getResponseHeader('Content-Type') === 'application/json'
             ) {
