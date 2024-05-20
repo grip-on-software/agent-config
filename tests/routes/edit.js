@@ -171,6 +171,8 @@ describe('Edit', function() {
         request(app).post('/edit').send(Object.assign({}, submit_data, {
             'environment[quality_report_name]_2[key]': 'EX',
             'environment[quality_report_name]_2[value]': 'example',
+            'environment[quality_time_url]': 'http://qt.test',
+            'environment[sonar_url]': 'http://sonar.test',
         })).then(() => {
             request(app).get('/edit')
                 .expect('Content-Type', 'text/html')
@@ -181,6 +183,8 @@ describe('Edit', function() {
                     const { document } = window;
                     assert.equal(document.querySelector("input#id_environment\\[quality_report_name\\]_2\\[key\\]").value, "EX");
                     assert.equal(document.querySelector("input#id_environment\\[quality_report_name\\]_2\\[value\\]").value, "example");
+                    assert.equal(document.querySelector("input#id_environment\\[quality_time_url\\]").value, "http://qt.test");
+                    assert.equal(document.querySelector("input#id_environment\\[sonar_url\\]").value, "http://sonar.test");
                     done();
                 }).catch((err) => {
                     done(err);
