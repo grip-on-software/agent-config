@@ -14,9 +14,9 @@
     "key_path": "",
     "visualization_url": "",
     "jira_url": "http://jira.example",
-    "quality_report_definition_url": "http://quality-report.example",
     "bigboat_placeholder": "http://bigboat.example",
-    "quality_time_placeholder": "http://www.quality-time.example:5000",
+    "quality_time_placeholder": "http://www.quality-time.example",
+    "sonar_placeholder": "http://sonar.example",
     "version_control_placeholder": "gitlab.example",
     "version_control_port_sample": "tfs.example:8080",
     "jenkins_placeholder": "jenkins.example:8080"

@@ -33,21 +33,22 @@ environment:
                     field: string
                     label: 'Quality name'
                     placeholder: 'abc'
-            label: 'Quality report name'
-            hint: 'The name of the project used internally by the quality report dashboard or the application dashboard.'
-            longer_hint: 'Find the name in <a href="{{quality_report_definition_url}}">the Quality reports definitions</a>; if you have a repository like <samp>quality-report-abc-definition</samp> then this is <kdb>abc</kdb>. Another valid option is to set it to the dashboard URL fragment. Skip this if there is no quality report and no Quality Time instance; or if the quality source does not contain any source information for the sources we obtain (e.g., version control). To collect multiple projects in the agent, include for each project their JIRA key and quality report name.'
+            label: 'Project definition quality name'
+            hint: 'The name of the project used internally by the quality metrics dashboard (SonarQube or Quality-time).'
+            longer_hint: 'Set the quality name to the organization name if using SonarCloud. Skip this if there is no SonarQube or Quality-time instance; or if the quality source does not contain any useful source or metric measurement information for the sources we obtain (e.g., version control). Otherwise, the quality name is necessary to properly function. To collect multiple projects in the agent, include for each project their JIRA key and quality name.'
             cloneable: true
-        quality_report_enable:
-            field: boolean
-            widget: checkbox
-            label: 'Use quality report'
-            hint: 'Disable this <strong>only</strong> when the quality report is never used and only a Quality Time instance is used.'
         quality_time_url:
             field: string
             label: 'Quality Time URL'
             placeholder: '{{{quality_time_placeholder}}}'
-            hint: 'The URL to the landing page of the Quality Time reports or a specific report URL.'
+            hint: 'The URL to the landing page of the Quality-time reports or a specific report URL.'
             option: [settings, 'quality-time', 'url']
+        sonar_url:
+            field: string
+            label: 'SonarQube URL'
+            placeholder: '{{{sonar_placeholder}}}'
+            hint: 'The URL to the landing page of the SonarQube reports or a specific report URL.'
+            option: [settings, 'sonar', 'url']
 version_control:
     name: Version control system
     icon: 'fas fa-code-branch'

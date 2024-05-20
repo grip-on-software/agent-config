@@ -79,9 +79,9 @@ different help snippets (example placeholders, information links) in the agent
 form editor:
 
 - `jira_url`: The base URL to a JIRA instance where the JIRA boards are found.
-- `quality_report_definition_url`: A URL to a page which displays project 
-  definition repository names for the quality report source.
 - `bigboat_placeholder`: An example base URL of a BigBoat instance.
+- `quality_time_placeholder`: An example base URL of a Quality-time instance.
+- `sonar_placeholder`: An example base URL of a SonarQube instance.
 - `version_control_placeholder`: An example domain name of a version control 
   system, preferably a simple one.
 - `version_control_port_sample`: An example domain name of a version control 
