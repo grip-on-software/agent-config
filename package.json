@@ -37,7 +37,10 @@
     "production": "cross-env NODE_ENV=production node lib/index.js",
     "start": "node lib/index.js",
     "lint": "cross-env NODE_ENV=development jshint lib res",
-    "test": "rm -rf test-config test-export test-ssh && mkdir -p test-report/junit test-report/html test-config test-export test-ssh && echo 'test-dev' > test-config/VERSION && cross-env NODE_ENV=development CONFIG_PATH=test-config EXPORT_PATH=test-export IDENTITY_PATH=test-ssh nyc --reporter=lcov --reporter=text mocha --timeout 5000 --reporter=mocha-multi-reporters --reporter-options configFile=test-config.json tests/*.js tests/**/*.js"
+    "test": "rm -rf test-config test-export test-ssh && mkdir -p test-report/junit test-report/html test-config test-export test-ssh && echo 'test-dev' > test-config/VERSION && cross-env NODE_ENV=development CONFIG_PATH=test-config EXPORT_PATH=test-export IDENTITY_PATH=test-ssh nyc --reporter=lcov --reporter=text mocha --timeout 5000 --reporter=mocha-multi-reporters --reporter-options configFile=test-config.json tests/*.js tests/**/*.js",
+    "preversion": "npm test",
+    "version": "sed -i '' -e s/sonar\\.projectVersion=.*/sonar.projectVersion=$(jq -r .version package.json)/ sonar-project.properties && sed -i '' -e s/^version:\\ .*/version:\\ $(jq -r .version package.json)/ CITATION.cff && sed -i '' -e s/^##\\ \\\\[Unreleased\\\\]/##\\ [Unreleased]\\\\n\\\\n##\\ [$(jq -r .version package.json)]\\ -\\ $(date +%Y-%m-%d)/ -e s/^\\\\[Unreleased\\\\]:/[Unreleased]:\\ \\\\nhttps:\\\\/\\\\/github.com\\\\/grip-on-software\\\\/visualization-ui\\\\/compare\\\\/v$(jq -r .version package.json)...HEAD\\\\n[$(jq -r .version package.json)]:\\ / -e s/\\.\\.\\.HEAD$/...$(jq -r .version package.json)/ CHANGELOG.md && git add sonar-project.properties CITATION.cff CHANGELOG.md",
+    "postversion": "git push && git push --tags"
   },
   "devDependencies": {
     "@babel/core": "^7.24.5",

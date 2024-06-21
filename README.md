@@ -15,7 +15,7 @@ research project.
 
 ## Requirements
 
-The agent configurator is tested with NodeJS 20+ and npm 10+.
+The agent configurator service is tested with NodeJS 20+ and npm 10+.
 
 A GROS [data-gathering](https://github.com/grip-on-software/data-gathering) 
 agent should be deployed in concert with the configurator in order to make use 
@@ -127,7 +127,7 @@ can be started using respectively `npm run dev`, `npm run watch` or `npm start`
 support by starting `npm run watch` in a separate terminal, then you can 
 develop and instantly see the changes take effect.
 
-## Testing
+## Development and testing
 
 Run the unit tests using `npm test`. You may want to override the configuration 
 options, especially if you if you have a `config.json` file with options 
@@ -146,3 +146,13 @@ This includes quality gate scans tracked by
 [SonarCloud](https://sonarcloud.io/project/overview?id=grip-on-software_agent-config) 
 and [Coveralls](https://coveralls.io/github/grip-on-software/agent-config) for 
 coverage history.
+
+We publish releases to [npm](https://www.npmjs.com/package/@gros/agent-config). 
+The release files are also published on 
+[GitHub](https://github.com/grip-on-software/agent-config/releases) and from 
+there are archived on [Zenodo](https://doi.org/10.5281/zenodo.11115707). 
+Noteworthy changes are added to the [changelog](CHANGELOG.md).
+
+## License
+
+The agent configuration service is licensed under the Apache 2.0 License.
