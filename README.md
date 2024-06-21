@@ -15,13 +15,13 @@ research project.
 
 ## Requirements
 
-The agent configurator service is tested with NodeJS 20+ and npm 10+.
+The agent configuration service is tested with Node.js 20+ and npm 10+.
 
 A GROS [data-gathering](https://github.com/grip-on-software/data-gathering) 
-agent should be deployed in concert with the configurator in order to make use 
-of the configuration; see the [Building](#building) for an example Docker 
-Compose setup. The agent also communicates with the controller server daemon 
-that is available in that repository.
+agent should be deployed in concert with the configuration service in order to 
+make use of the created configuration; see the [Building](#building) for an 
+example Docker Compose setup. The agent also communicates with the controller 
+server daemon that is available in that repository.
 
 For a standalone usage, install the dependencies of this package by running 
 `npm install .` This also installs the front-end dependencies. If you do not 
