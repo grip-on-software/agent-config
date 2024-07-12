@@ -76,15 +76,20 @@
                     "format": "uri",
                     "description": "URL of JIRA instance."
                 },
-                "quality_report_definition_url": {
-                    "type": "string",
-                    "format": "uri",
-                    "description": "URL to project definition repositories for Quality report."
-                },
                 "bigboat_placeholder": {
                     "type": "string",
                     "format": "uri",
                     "description": "Example base URL for BigBoat."
+                },
+                "quality_time_placeholder": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "Example base URL for Quality-time."
+                },
+                "sonar_placeholder": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "Example base URL for SonarQube."
                 },
                 "version_control_placeholder": {
                     "type": "string",
