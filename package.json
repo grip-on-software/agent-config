@@ -1,6 +1,6 @@
 {
   "name": "@gros/agent-config",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "description": "Web interface for status and configuration of the data gathering agent.",
   "keywords": [
     "agent-based",

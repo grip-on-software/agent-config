@@ -7,6 +7,8 @@ and we adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [1.0.0] - 2024-07-13
+
 ### Added
 
 - Support for SonarQube source added.
@@ -33,5 +35,7 @@ and we adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   Previously, versions were rolling releases based on Git commits.
 
 [Unreleased]: 
-https://github.com/grip-on-software/agent-config/compare/v0.0.3...HEAD
+https://github.com/grip-on-software/visualization-ui/compare/v1.0.0...HEAD
+[1.0.0]:  
+https://github.com/grip-on-software/agent-config/compare/v0.0.3...1.0.0
 [0.0.3]: https://github.com/grip-on-software/agent-config/releases/tag/v0.0.3
